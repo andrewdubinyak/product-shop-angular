@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'product-shop-angular';
+  title = 'product-shop';
+  showFiller = false;
+  public isMenuCollapsed = true;
+  opened = false;
+  left = 'left'
+
+  toggleSidebar() {
+    this.opened = !this.opened
+  }
+
+  ngOnInit() {
+  }
 }

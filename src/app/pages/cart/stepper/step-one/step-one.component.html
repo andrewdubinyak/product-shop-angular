@@ -1,0 +1,13 @@
+<div class="step-container">
+  <form [formGroup]="stepOneForm"
+        (ngSubmit)="stepOneSubmit()"
+        autocomplete="off"
+        novalidate
+        #formRef="ngForm">
+  </form>
+  <h1>Cart</h1>
+  <div class="product-cart">
+    <i class="bi bi-basket icon-basket"></i>
+  </div>
+  <button type="button" class="btn btn-success" cdkStepperNext>Next</button>
+</div>

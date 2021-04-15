@@ -1,0 +1,159 @@
+.page-content {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00072bad;
+}
+
+.block-login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #f7cd50;
+  border-radius: 10px;
+}
+
+.block-header {
+  background: #00072b;
+  color: white;
+  width: -webkit-fill-available;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  flex-direction: column;
+}
+
+.block-phone > p {
+  padding: 5px;
+  background: white;
+  margin: 0;
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  border-radius: 5px 0 0 5px;
+}
+
+.form-login {
+  display: flex;
+  flex-flow: column;
+  margin: 20px
+}
+
+.input-group-block {
+  display: flex;
+  flex-flow: column;
+  margin: 5px;
+}
+
+.input-group-block > label {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 14px;
+}
+
+
+.block-phone {
+  display: flex;
+}
+
+.input-phone {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+.input-password {
+  padding-top: 2px;
+  width: 250px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: left;
+}
+
+.btg-login {
+  display: flex;
+  flex-flow: column;
+  margin-top: 14px;
+}
+
+.button {
+  margin: 3px;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+  height: 40px;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.button:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.button:before {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.button {
+  background: #00072b;
+  color: #fff;
+}
+
+.button:hover {
+  background: #212651;
+}
+
+.button:active {
+  background: #212651;
+  top: 2px;
+}
+
+.button:before {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 3;
+  font-size: 140%;
+  width: 60px;
+}

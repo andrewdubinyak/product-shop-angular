@@ -1,0 +1,90 @@
+<div class="product">
+  <div class="product-container row">
+    <div class="col-sm product-image">
+      <img class="img-fluid"
+           src="https://cooker.net.ua/upload/iblock/cde/tushka_kurchati_broylera_1_7_2_5kg-524.jpg"
+           alt="">
+    </div>
+    <div class="col-sm product-detail">
+      <h3>Details</h3>
+      <ngb-rating [rate]="5"
+                  style="outline: none; color: #ffd500; margin-bottom: 4px">
+      </ngb-rating>
+      <div style="display: flex; align-items: baseline;">
+        <i class="bi bi-bar-chart-fill" style="color: #18e000"></i>
+        <p style="margin-left: 3px; color: #139803">В наявності</p>
+      </div>
+      <hr>
+      <div class="description">
+        <p>Цей товар додається в корзину з максимальною вагою, вказаною в назві
+          товару. Підсумкову вартість буде перераховано після зважування та
+          підготовки замовлення до відправки. Ви отримаєте лист та смс з
+          оновленням статусу замовлення і його остаточною вартістю.</p>
+      </div>
+      <hr>
+      <div class="product-price row">
+        <div class="price col-sm">
+          <span>199.10<b>грн.</b></span>
+        </div>
+        <div class="col-sm"
+             style="display: flex; flex-flow: row; margin-top: 10px">
+          <div class="input-group" role="group"
+               aria-label="Basic outlined example"
+               style="height: 40px; width: 120px">
+            <button type="button" class="btn btn-outline-success">-</button>
+            <input type="text"
+                   style="width: 40px;border: solid #27a844 1px; outline: none;"/>
+            <button type="button" class="btn btn-outline-success">+</button>
+          </div>
+          <button type="button" class="btn btn-success"
+                  style="height: 40px; width: 80px; flex-flow: row-reverse">
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product">
+  <ul ngbNav #nav="ngbNav" class="nav-tabs product-tabs">
+    <li ngbNavItem class="col-sm" style="padding-left: 0; padding-right: 0">
+      <a ngbNavLink
+         style="border-radius: 0;border-color: #00072b #ffffff #fff;">Characteristic</a>
+      <ng-template ngbNavContent>
+        <table class="table table-striped table-bordered">
+          <tbody>
+          <tr>
+            <td>Brand</td>
+            <td>Mark</td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>Mark</td>
+          </tr>
+          <tr>
+            <td>Packedge</td>
+            <td>Mark</td>
+          </tr>
+          <tr>
+            <td>Manufacturer</td>
+            <td>Mark</td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </li>
+    <li ngbNavItem class="col-sm" style="padding-left: 0; padding-right: 0">
+      <a ngbNavLink
+         style="border-radius: 0; border-color: #00072b #ffffff #fff;">Reviews</a>
+      <ng-template ngbNavContent>
+        <div class="product-rating">
+          <ngb-rating [rate]="5"
+                      style="outline: none; color: #ffd500; margin-bottom: 4px"></ngb-rating>
+          <p>This rating uses customized default values.</p>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* Navbar menu icon style */
+i {
+  color: white;
+  font-size: 1.5rem
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+
+/* Icon Button */
+.icon-button {
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: none;
+  margin: 2px;
+  outline: none;
+}
+
+.icon-button:before {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-button:hover {
+  background: #ffffff21;
+}
+
+.icon-button:active {
+  background: #ffffff52;
+  border: none;
+}
+
+/* SLIDER */
+
+.ngx-slider-pointer {
+  outline: none;
+  z-index: 1;
+
+}
+
+.product-filter {
+  .ngx-slider {
+    .ngx-slider-pointer {
+      width: 20px;
+      height: 20px;
+      top: -9px;
+      z-index: 1;
+    }
+  }
+}
+
+.product-filter .ngx-slider .ngx-slider-pointer:after {
+  top: 6px;
+  left: 6px;
+}
