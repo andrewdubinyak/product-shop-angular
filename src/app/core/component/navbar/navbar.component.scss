@@ -1,0 +1,46 @@
+.navbar {
+  position: relative;
+  background: #00072b;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.collapse-button {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-container {
+  position: absolute;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Sidebar */
+ng-sidebar-container {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+::ng-deep .ng-sidebar {
+  background: #ffffff;
+  width: 340px;
+  position: absolute;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.sidebar-header {
+  height: 60px;
+  background: #00072b;
+  display: flex;
+  flex-flow: row-reverse;
+  align-items: center;
+  padding: 10px;
+}
