@@ -1,0 +1,70 @@
+@import "./src/app/app.component";
+
+.navbar {
+  background: #00072b;
+  color: white;
+  margin-left: 240px
+}
+
+.sidebar-menu {
+  width: 240px;
+  height: 100%;
+  background: #122538;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar-menu-header {
+  background-color: #122538;
+  color: white;
+  height: 56px;
+}
+
+//*Accordion*//
+
+::ng-deep .card {
+  margin-top: 5px;
+  background-color: #122538;
+  border-radius: 0;
+  border: none;
+  color: white;
+}
+
+::ng-deep .card .card-header .btn-link {
+  color: white;
+  text-decoration: none;
+  width: 100%;
+}
+
+::ng-deep .card .card-header {
+  border-bottom: solid 1px #2e3236;
+}
+
+.menu-button {
+  width: 100%;
+  background: none;
+  padding: 10px;
+
+}
+
+.menu-button:hover {
+  background: #77777782;
+}
+
+.menu-button:active {
+  background: #77777782;
+  top: 2px;
+}
+
+.collapse-icon {
+  position: absolute;
+  right: 0;
+  margin-right: 18px
+}
+
+.accordion-btn {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}

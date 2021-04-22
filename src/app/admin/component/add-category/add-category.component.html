@@ -1,0 +1,17 @@
+<div class="add-category row">
+  <form [formGroup]="categoryForm" class="row">
+    <div class="category-form col-sm">
+      <label>Name</label>
+      <input class="input" type="text" formControlName="name">
+      <label>Image</label>
+      <input type="file" class="input" (change)="uploadFile($event)">
+      <button type="button" class="btn btn-outline-success"
+              style="margin-top: 10px"
+              [disabled]="categoryForm.invalid"
+              (click)="onSubmit()">Add Category
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-toasts></app-toasts>

@@ -7,6 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from "./core/core.module";
 import {ShopComponent} from './shop/shop.component';
 import {ShopModule} from "./shop/shop.module";
+import {JwtInterceptor} from "./interceptors/auth.interceptor";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,8 +22,13 @@ import {ShopModule} from "./shop/shop.module";
     BrowserAnimationsModule,
     CoreModule,
     ShopModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

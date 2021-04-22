@@ -6,26 +6,33 @@ import {ProductDetailComponent} from "./component/product-detail/product-detail.
 import {CartComponent} from "./component/cart/cart.component";
 import {SignInComponent} from "./component/sign-in/sign-in.component";
 import {SignUpComponent} from "./component/sign-up/sign-up.component";
+import {ShopComponent} from "./shop.component";
 
 const routes: Routes = [
   {
-    path: '', component: CatalogComponent
+    path: 'shop', component: ShopComponent,
+    children: [
+      {
+        path: 'catalog', component: CatalogComponent,
+      },
+      {
+        path: 'sign-in', component: SignInComponent, pathMatch: 'full'
+      },
+      {
+        path: 'sign-up', component: SignUpComponent, pathMatch: 'full'
+      },
+      {
+        path: 'product', component: ProductComponent, pathMatch: 'full'
+      },
+      {
+        path: 'product-detail', component: ProductDetailComponent, pathMatch: 'full'
+      },
+      {
+        path: 'cart', component: CartComponent, pathMatch: 'full'
+      }
+    ]
   },
-  {
-    path: 'sign-in', component: SignInComponent
-  },
-  {
-    path: 'sign-up', component: SignUpComponent
-  },
-  {
-    path: 'product', component: ProductComponent
-  },
-  {
-    path: 'product-detail', component: ProductDetailComponent
-  },
-  {
-    path: 'cart', component: CartComponent
-  }
+  {path: '**', redirectTo: 'catalog'}
 ];
 
 @NgModule({

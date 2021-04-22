@@ -1,0 +1,114 @@
+<div class="add-product row">
+  <form [formGroup]="productForm" class="row">
+    <div class="product-form col-sm">
+      <label>Name</label>
+      <input class="input" type="text" name="name" formControlName="name">
+      <label>Weight</label>
+      <input class="input" type="text" name="name" formControlName="weight">
+      <label>Price</label>
+      <input class="input" type="text" name="name" formControlName="price">
+      <label>Short Description</label>
+      <textarea class="input-description" name="name"
+                formControlName="shortDescription"></textarea>
+    </div>
+    <div action="" class="category-form col-sm-3">
+      <label>Category</label>
+      <div class="inp-group">
+        <select class="select" type="text" name="name"
+                formControlName="category"></select>
+        <button class="icon-button" type="button" (click)="open(category)">
+          <i class="bi bi-plus-circle-fill"></i>
+        </button>
+      </div>
+      <label>Subcategory</label>
+      <div class="inp-group">
+        <select class="select" type="text" name="name"
+                formControlName="subcategory"></select>
+        <button class="icon-button" type="button" (click)="open(subcategory)">
+          <i class="bi bi-plus-circle-fill"></i>
+        </button>
+      </div>
+      <label>Stock</label>
+      <input class="input" type="checkbox" name="name" formControlName="stock">
+      <label>Type</label>
+      <select class="select" type="text" name="name"
+              formControlName="type"></select>
+    </div>
+    <div action="" class="character col-sm">
+      <label>Brand</label>
+      <input class="input" type="text" name="name" formControlName="brand">
+      <label>Packedge</label>
+      <input class="input" type="text" name="name" formControlName="packedge">
+      <label>Manufacture</label>
+      <input class="input" type="text" name="name"
+             formControlName="manufacturer">
+      <label>Description</label>
+      <textarea class="input-description" name="name"
+                formControlName="description"></textarea>
+      <button type="button" class="btn btn-outline-success"
+              style="margin-top: 10px"
+              [disabled]="productForm.invalid"
+              (click)="onSubmit(productForm.value)">Add
+      </button>
+    </div>
+  </form>
+  <form class="image-form">
+    <label>Image</label>
+    <input type='file' (change)="onSelectFile($event)" multiple>
+    <div class="row-cols-3">
+      <img class="col-6 col-md-4 p-2 card-img-top" style="max-height: 250px"
+           *ngFor='let url of urls' [src]="url" height="200">
+    </div>
+  </form>
+
+  <ng-template #category let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Category</h4>
+      <button type="button" class="close" aria-label="Close"
+              (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="category">Name</label>
+          <div class="input-group">
+            <input class="input" type="text" id="category" style="width: 300px">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success"
+              (click)="modal.close('Save click')">Add
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #subcategory let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Add Sub-Category</h4>
+      <button type="button" class="close" aria-label="Close"
+              (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="sub-category">Name</label>
+          <div class="input-group">
+            <input class="input" type="text" id="sub-category"
+                   style="width: 300px">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success"
+              (click)="modal.close('Save click')">Add
+      </button>
+    </div>
+  </ng-template>
+</div>
