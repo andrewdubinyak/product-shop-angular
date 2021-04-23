@@ -11,7 +11,7 @@ import {CommonService} from "../../../services/common.service";
   styleUrls: ['./add-category.component.scss']
 })
 export class AddCategoryComponent implements OnInit {
-  urls = [];
+  urls: any;
   closeResult = '';
   categoryForm: any = FormGroup;
 
@@ -54,6 +54,16 @@ export class AddCategoryComponent implements OnInit {
           const msg = error.error.error.message
           this.commonService.showErrorToastMessage(msg);
         })
+  }
+
+  onSelectFile(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.urls = event.target.result
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   ngOnInit() {

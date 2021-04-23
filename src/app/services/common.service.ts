@@ -12,14 +12,14 @@ export class CommonService {
   }
 
   showSuccessToastMessage(message: any) {
-    return this.toastService.show(`Success: ${message}`, {
+    return this.toastService.show(`${message}`, {
       classname: 'bg-success text-light',
       delay: 15000
     });
   }
 
   showErrorToastMessage(message: any) {
-    return this.toastService.show(`Error:${message}`, {
+    return this.toastService.show(`${message}`, {
       classname: 'bg-danger text-light',
       delay: 15000,
     });

@@ -11,28 +11,32 @@ import {AddCategoryComponent} from './component/add-category/add-category.compon
 import {AddSubCategoryComponent} from './component/add-sub-category/add-sub-category.component';
 import {AdminHeaderMenuComponent} from './component/admin-header-menu/admin-header-menu.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { AdminLoginComponent } from './component/admin-login/admin-login.component';
+import {AdminLoginComponent} from './component/admin-login/admin-login.component';
 import {ToastsContainer} from "../core/component/toast/toast.component";
+import {CategoryListComponent} from './component/category-list/category-list.component';
+import {NgSelectModule} from "@ng-select/ng-select";
 
 
 @NgModule({
-    declarations: [
-        DashboardComponent,
-        AdminComponent,
-        AddProductComponent,
-        ProductListComponent,
-        AddCategoryComponent,
-        AddSubCategoryComponent,
-        AdminHeaderMenuComponent,
-        AdminLoginComponent,
-        ToastsContainer,
-    ],
+  declarations: [
+    DashboardComponent,
+    AdminComponent,
+    AddProductComponent,
+    ProductListComponent,
+    AddCategoryComponent,
+    AddSubCategoryComponent,
+    AdminHeaderMenuComponent,
+    AdminLoginComponent,
+    ToastsContainer,
+    CategoryListComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ]
 })
 export class AdminModule {

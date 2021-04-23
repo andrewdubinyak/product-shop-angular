@@ -1,31 +1,56 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../services/product.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
+import {CategoryService} from "../../../services/category.service";
+import {CommonService} from "../../../services/common.service";
+import {SubCategoryService} from "../../../services/sub-category.service";
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit, OnDestroy {
   private subscriptionDestroyed$: Subject<void> = new Subject<void>();
   urls = [];
   closeResult = '';
   productForm: FormGroup;
+  categoryForm: FormGroup;
+  subcategoryForm: FormGroup;
+  categories: any = [];
+  subcategories: any = [];
+  catMod: number | undefined;
 
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private addProduct: ProductService
+    private addProduct: ProductService,
+    private categoryService: CategoryService,
+    private subCategoryService: SubCategoryService,
+    private commonService: CommonService,
     // private router: Router,
     // private appEventService: AppEventService,
     // private apiService: ApiService,
-    // private authService: AuthService,
-    // private commonService: CommonService,
   ) {
+    this.categoryForm = fb.group({
+      name: new FormControl('', {
+        validators: [Validators.required]
+      }),
+      file: new FormControl('', {
+        validators: [Validators.required]
+      })
+    })
+    this.subcategoryForm = fb.group({
+      category: new FormControl('', {
+        validators: [Validators.required]
+      }),
+      name: new FormControl('', {
+        validators: [Validators.required]
+      })
+    })
     this.productForm = fb.group({
       name: new FormControl('', {
         validators: [Validators.required],
@@ -60,10 +85,10 @@ export class AddProductComponent {
       packedge: new FormControl('', {
         validators: [Validators.required]
       }),
-      manufacture: new FormControl('', {
+      manufacturer: new FormControl('', {
         validators: [Validators.required]
       }),
-      Description: new FormControl('', {
+      description: new FormControl('', {
         validators: [Validators.required]
       }),
     });
@@ -82,13 +107,50 @@ export class AddProductComponent {
       type: formObj.type,
       brand: formObj.brand,
       packedge: formObj.packedge,
-      manufacture: formObj.manufacture,
-      Description: formObj.Description,
+      manufacturer: formObj.manufacturer,
+      description: formObj.description,
     };
     this.addProduct.createProduct(payload)
       .pipe(takeUntil(this.subscriptionDestroyed$)).subscribe((res) => {
       console.log(res)
     })
+  }
+
+  uploadFile(event: any) {
+    const file: any = (event.target as HTMLInputElement).files;
+    this.categoryForm.patchValue({
+      file: file.item(0)
+    });
+    // @ts-ignore
+    this.categoryForm.get('file').updateValueAndValidity()
+  }
+
+  onSubmitCategory() {
+    const payload: any = new FormData();
+    // @ts-ignore
+    payload.append("name", this.categoryForm.get('name').value);
+    // @ts-ignore
+    payload.append("file", this.categoryForm.get('file').value);
+    this.categoryService.createCategory(payload).subscribe(() => {
+      this.commonService.showSuccessToastMessage(`New category added!`)
+    }, (error) => {
+      const msg = error.error.error.message
+      this.commonService.showErrorToastMessage(msg);
+    })
+  }
+
+  onSubmitSubcategory(formObj: any) {
+    const payload = {
+      category: formObj.category,
+      name: formObj.name
+    }
+    this.subCategoryService.createSubcategory(payload).subscribe(() => {
+        this.commonService.showSuccessToastMessage(`New ${formObj.name} added!`)
+      },
+      (error) => {
+        const msg = error.error.error.message
+        this.commonService.showErrorToastMessage(msg)
+      })
   }
 
 
@@ -127,4 +189,23 @@ export class AddProductComponent {
       }
     }
   }
+
+  onSelectSubCategory(event: any) {
+    const categoryId = event.target.value
+    this.subCategoryService.getAllSubcategory().subscribe(subcategories => {
+      this.subcategories = subcategories.filter((item: any) => item.categoryId === parseInt(categoryId))
+    })
+  }
+
+  ngOnInit() {
+    this.categoryService.getAllCategory().subscribe(categories => {
+      this.categories = categories
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscriptionDestroyed$.next();
+    this.subscriptionDestroyed$.complete();
+  }
+
 }

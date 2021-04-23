@@ -2,37 +2,46 @@
   <form [formGroup]="productForm" class="row">
     <div class="product-form col-sm">
       <label>Name</label>
-      <input class="input" type="text" name="name" formControlName="name">
+      <input class="input" type="text" formControlName="name">
       <label>Weight</label>
-      <input class="input" type="text" name="name" formControlName="weight">
+      <input class="input" type="text" formControlName="weight">
       <label>Price</label>
-      <input class="input" type="text" name="name" formControlName="price">
+      <input class="input" type="number" formControlName="price">
       <label>Short Description</label>
-      <textarea class="input-description" name="name"
-                formControlName="shortDescription"></textarea>
+      <textarea class="input-description" formControlName="shortDescription">
+      </textarea>
     </div>
-    <div action="" class="category-form col-sm-3">
+    <div class="category-form col-sm-3">
       <label>Category</label>
       <div class="inp-group">
-        <select class="select" type="text" name="name"
-                formControlName="category"></select>
+        <select class="select" formControlName="category"
+                (change)="onSelectSubCategory($event)">
+          <option *ngFor="let category of categories"
+                  [value]="category.id">{{category.name}}</option>
+        </select>
         <button class="icon-button" type="button" (click)="open(category)">
           <i class="bi bi-plus-circle-fill"></i>
         </button>
       </div>
       <label>Subcategory</label>
       <div class="inp-group">
-        <select class="select" type="text" name="name"
-                formControlName="subcategory"></select>
+        <select class="select" name="name" formControlName="subcategory">
+          <option *ngFor="let subcategory of subcategories"
+                  [value]="subcategory.id">{{subcategory.name}}</option>
+        </select>
         <button class="icon-button" type="button" (click)="open(subcategory)">
           <i class="bi bi-plus-circle-fill"></i>
         </button>
       </div>
-      <label>Stock</label>
+      <label>In-Stock</label>
       <input class="input" type="checkbox" name="name" formControlName="stock">
       <label>Type</label>
-      <select class="select" type="text" name="name"
-              formControlName="type"></select>
+      <select class="select" name="name" formControlName="type">
+        <option value="1">LITER</option>
+        <option value="2">KG</option>
+      </select>
+      <label>Штрихкод</label>
+      <input class="input" type="number" name="name" formControlName="stock">
     </div>
     <div action="" class="character col-sm">
       <label>Brand</label>
@@ -51,13 +60,14 @@
               (click)="onSubmit(productForm.value)">Add
       </button>
     </div>
-  </form>
-  <form class="image-form">
-    <label>Image</label>
-    <input type='file' (change)="onSelectFile($event)" multiple>
-    <div class="row-cols-3">
-      <img class="col-6 col-md-4 p-2 card-img-top" style="max-height: 250px"
-           *ngFor='let url of urls' [src]="url" height="200">
+
+    <div class="image-form">
+      <label>Image</label>
+      <input type='file' (change)="onSelectFile($event)" multiple>
+      <div class="row-cols-3">
+        <img class="col-6 col-md-4 p-2 card-img-top" style="max-height: 250px"
+             *ngFor='let url of urls' [src]="url" height="200">
+      </div>
     </div>
   </form>
 
@@ -69,21 +79,27 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-      <form>
+    <form [formGroup]="categoryForm">
+      <div class="modal-body">
         <div class="form-group">
           <label for="category">Name</label>
           <div class="input-group">
-            <input class="input" type="text" id="category" style="width: 300px">
+            <input class="input" type="text" id="category"
+                   formControlName="name"
+                   style="width: 400px">
           </div>
+          <label for="Image">Image</label>
+          <input type="file" formControlName="file"
+                 (change)="uploadFile($event)">
         </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-success"
-              (click)="modal.close('Save click')">Add
-      </button>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success"
+                [disabled]="categoryForm.invalid"
+                (click)="onSubmitCategory()">Add
+        </button>
+      </div>
+    </form>
   </ng-template>
 
   <ng-template #subcategory let-modal>
@@ -95,20 +111,34 @@
       </button>
     </div>
     <div class="modal-body">
-      <form>
+      <form [formGroup]="subcategoryForm">
         <div class="form-group">
+          <label for="category-w">Category</label>
+          <div class="input-group">
+            <select class="input" name="name" id="category-w"
+                    style="width: 300px" formControlName="category">
+              <option *ngFor="let category of categories"
+                      [value]="category.id">{{category.name}}
+              </option>
+            </select>
+          </div>
           <label for="sub-category">Name</label>
           <div class="input-group">
             <input class="input" type="text" id="sub-category"
-                   style="width: 300px">
+                   formControlName="name" style="width: 300px">
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-success"
-              (click)="modal.close('Save click')">Add
+              [disabled]="subcategoryForm.invalid"
+              (click)="onSubmitSubcategory(subcategoryForm.value); modal.close('Save click')">
+        Add
       </button>
     </div>
   </ng-template>
 </div>
+
+
+<app-toasts></app-toasts>

@@ -8,6 +8,7 @@ import {AddSubCategoryComponent} from "./component/add-sub-category/add-sub-cate
 import {AdminLoginComponent} from "./component/admin-login/admin-login.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdminComponent} from "./admin.component";
+import {CategoryListComponent} from "./component/category-list/category-list.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
       },
       {
         path: 'add-category', component: AddCategoryComponent, pathMatch: 'full'
+      },
+      {
+        path: 'category-list', component: CategoryListComponent, pathMatch: 'full'
       },
       {
         path: 'add-sub-category',
