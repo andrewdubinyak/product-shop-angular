@@ -21,7 +21,6 @@ export class AddCategoryComponent implements OnInit {
     private fb: FormBuilder,
     private addCategory: CategoryService,
     private commonService: CommonService,
-    // private appEventService: AppEventService,
   ) {
     this.categoryForm = fb.group({
       name: new FormControl('', {
