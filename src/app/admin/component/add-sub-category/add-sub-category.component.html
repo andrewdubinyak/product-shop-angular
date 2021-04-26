@@ -1,0 +1,19 @@
+<div class="add-sub-category row">
+  <form [formGroup]="subCategoryForm" class="row">
+    <div class="sub-category-form col-sm">
+      <label>Category</label>
+      <select class="select" name="name" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+      </select>
+      <label>Name</label>
+      <input class="input" type="text" formControlName="name">
+      <button type="button" class="btn btn-outline-success"
+              style="margin-top: 10px"
+              [disabled]="subCategoryForm.invalid"
+              (click)="onSubmit(subCategoryForm.value)">Add Sub Category
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-toasts></app-toasts>

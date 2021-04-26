@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <a class="navbar-brand" [routerLink]="'.'">Admin Panel</a>
+</nav>
+
+<div class="sidebar-menu">
+  <div class="sidebar-menu-header">
+    <h2>HEADER</h2>
+  </div>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0"
+                 (panelChange)="toggleAccordion($event)">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <div class="accordion-btn">
+          <span>Product</span>
+          <div class="collapse-icon">
+            <i *ngIf="!isContentOpen['ngb-panel-0']" class="bi bi-plus"></i>
+            <i *ngIf="isContentOpen['ngb-panel-0']" class="bi bi-dash"></i>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div style="display: flex;flex-flow: column">
+          <button class="menu-button button" [routerLink]="['add-product']">
+            <span>Add Product</span>
+          </button>
+          <button class="menu-button button" [routerLink]="['product-list']">
+            <span>Product List</span>
+          </button>
+        </div>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <div class="accordion-btn">
+          <span>Category</span>
+          <div class="collapse-icon">
+            <i *ngIf="!isContentOpen['ngb-panel-1']" class="bi bi-plus"></i>
+            <i *ngIf="isContentOpen['ngb-panel-1']" class="bi bi-dash"></i>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div style="display: flex;flex-flow: column">
+          <button class="menu-button button" [routerLink]="['add-category']">
+            <span>Category</span>
+          </button>
+          <button class="menu-button button"
+                  [routerLink]="['add-sub-category']">
+            <span>Sub-Category</span>
+          </button>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

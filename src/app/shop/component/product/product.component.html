@@ -1,4 +1,3 @@
-<app-navbar></app-navbar>
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened">
     <div class="sidebar-header">
@@ -8,43 +7,45 @@
     </div>
   </ng-sidebar>
 </ng-sidebar-container>
-<div class="product-block">
-  <div class="product-header">
-    <h1>HEADER</h1>
-  </div>
-  <div class="product-filter d-none d-md-block d-lg-block">
-    <h2>Filter By Price</h2>
-    <div class="filter-rice">
-      <input type="number" [(ngModel)]="minValue">
-      -
-      <input type="number" [(ngModel)]="maxValue">
-      $
+<div class="container">
+  <div class="product-block">
+    <div class="product-header">
+      <h1>HEADER</h1>
     </div>
-    <ngx-slider [(value)]="minValue" [(highValue)]="maxValue"
-                [options]="options"></ngx-slider>
-    <h2>Filter by Value</h2>
-    <div class="product-filter-checkbox">
-      <div class="input-group" style="align-items: center">
-        <input class="m-3" type="checkbox" value="">
-        <h4>Value</h4>
+    <div class="product-filter d-none d-md-block d-lg-block">
+      <h2>Filter By Price</h2>
+      <div class="filter-rice">
+        <input type="number" [(ngModel)]="minValue">
+        -
+        <input type="number" [(ngModel)]="maxValue">
+        $
+      </div>
+      <ngx-slider [(value)]="minValue" [(highValue)]="maxValue"
+                  [options]="options"></ngx-slider>
+      <h2>Filter by Value</h2>
+      <div class="product-filter-checkbox">
+        <div class="input-group" style="align-items: center">
+          <input class="m-3" type="checkbox" value="">
+          <h4>Value</h4>
+        </div>
+      </div>
+    </div>
+    <div class="product-sorting-header">
+      <button class="icon-button d-md-none d-sm-block"
+              (click)="toggleSidebar()">
+        <i class="bi bi-filter-square" style="color: black"></i>
+      </button>
+      <button class="icon-button">
+        <i class="bi bi-filter-left" style="color: black"></i>
+      </button>
+      <button class="icon-button">
+        <i class="bi bi-sort-alpha-down" style="color: black"></i>
+      </button>
+      <div class="right-button">
+        <button class="icon-button">
+          <i class="bi bi-grid-3x3-gap-fill" style="color: black"></i>
+        </button>
       </div>
     </div>
   </div>
-  <div class="product-sorting-header">
-    <button class="icon-button d-md-none d-sm-block" (click)="toggleSidebar()">
-      <i class="bi bi-filter-square" style="color: black"></i>
-    </button>
-    <button class="icon-button">
-      <i class="bi bi-filter-left" style="color: black"></i>
-    </button>
-    <button class="icon-button">
-      <i class="bi bi-sort-alpha-down" style="color: black"></i>
-    </button>
-    <div class="right-button">
-      <button class="icon-button">
-        <i class="bi bi-grid-3x3-gap-fill" style="color: black"></i>
-      </button>
-    </div>
-  </div>
 </div>
-

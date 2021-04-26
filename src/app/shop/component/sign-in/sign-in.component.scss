@@ -1,3 +1,5 @@
+@import "./src/app/app.component";
+
 .page-content {
   position: fixed;
   z-index: 1;
@@ -90,70 +92,4 @@
   display: flex;
   flex-flow: column;
   margin-top: 14px;
-}
-
-.button {
-  margin: 3px;
-  border: none;
-  border-radius: 5px;
-  width: 250px;
-  height: 40px;
-  font-size: inherit;
-  color: inherit;
-  background: none;
-  cursor: pointer;
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  outline: none;
-  position: relative;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-.button:after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-/* Pseudo elements for icons */
-.button:before {
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  position: relative;
-  -webkit-font-smoothing: antialiased;
-}
-
-.button {
-  background: #00072b;
-  color: #fff;
-}
-
-.button:hover {
-  background: #212651;
-}
-
-.button:active {
-  background: #212651;
-  top: 2px;
-}
-
-.button:before {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  line-height: 3;
-  font-size: 140%;
-  width: 60px;
 }
