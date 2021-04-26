@@ -1,58 +1,49 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductService} from '../../../services/product.service'
-
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
-  }
-];
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Observable} from "rxjs";
+import {
+  NgbdSortableHeader,
+  SortEvent
+} from "../../../services/sortable.directive";
+import {Product} from "../../../models/product";
+import {DecimalPipe} from "@angular/common";
+import {SearchService} from "../../../services/search.service";
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
+  providers: [SearchService, DecimalPipe]
 })
+
 export class ProductListComponent implements OnInit {
+  products$: Observable<Product[]>;
+  total$: Observable<number>;
+
+  // @ts-ignore
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   products: any;
 
-  constructor(
-    public productService: ProductService) {
+  constructor(public service: SearchService) {
+    this.products$ = service.products$;
+    this.total$ = service.total$;
   }
 
-  countries = COUNTRIES;
-
   ngOnInit(): void {
-    this.productService.getAllProduct().subscribe(products => {
+    this.service.getAllProduct().subscribe(products => {
       console.log(products)
       this.products = products
     })
+  }
+
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    this.service.sortColumn = column;
+    this.service.sortDirection = direction;
   }
 }

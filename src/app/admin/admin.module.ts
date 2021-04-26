@@ -15,6 +15,7 @@ import {AdminLoginComponent} from './component/admin-login/admin-login.component
 import {ToastsContainer} from "../core/component/toast/toast.component";
 import {CategoryListComponent} from './component/category-list/category-list.component';
 import {NgSelectModule} from "@ng-select/ng-select";
+import {NgbdSortableHeader} from "../services/sortable.directive";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {NgSelectModule} from "@ng-select/ng-select";
     AdminLoginComponent,
     ToastsContainer,
     CategoryListComponent,
+    NgbdSortableHeader,
   ],
   imports: [
     CommonModule,

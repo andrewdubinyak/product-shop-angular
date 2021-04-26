@@ -1,12 +1,12 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../services/product.service";
-import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {CategoryService} from "../../../services/category.service";
 import {CommonService} from "../../../services/common.service";
 import {SubCategoryService} from "../../../services/sub-category.service";
+import {UploadService} from "../../../services/upload.service";
 
 @Component({
   selector: 'app-add-product',
@@ -17,12 +17,13 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private subscriptionDestroyed$: Subject<void> = new Subject<void>();
   urls = [];
   closeResult = '';
-  productForm: FormGroup;
-  categoryForm: FormGroup;
+  productForm: any = FormGroup;
+  categoryForm: any = FormGroup;
   subcategoryForm: FormGroup;
   categories: any = [];
   subcategories: any = [];
   catMod: number | undefined;
+  imageList: any
 
   constructor(
     private modalService: NgbModal,
@@ -31,9 +32,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private subCategoryService: SubCategoryService,
     private commonService: CommonService,
-    // private router: Router,
-    // private appEventService: AppEventService,
-    // private apiService: ApiService,
+    private uploadService: UploadService
   ) {
     this.categoryForm = fb.group({
       name: new FormControl('', {
@@ -62,7 +61,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         validators: [Validators.required]
       }),
       price: new FormControl('', {
-        validators: [Validators.required]
+        validators: [Validators.required,]
       }),
       shortDescription: new FormControl('', {
         validators: [Validators.required]
@@ -94,43 +93,40 @@ export class AddProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit(formObj: any) {
-    const payload = {
-      name: formObj.name,
-      weight: formObj.weight,
-      file: formObj.file,
-      price: formObj.price,
-      shortDescription: formObj.shortDescription,
-      category: formObj.category,
-      subcategory: formObj.subcategory,
-      stock: formObj.stock,
-      type: formObj.type,
-      brand: formObj.brand,
-      packedge: formObj.packedge,
-      manufacturer: formObj.manufacturer,
-      description: formObj.description,
-    };
-    this.addProduct.createProduct(payload)
-      .pipe(takeUntil(this.subscriptionDestroyed$)).subscribe((res) => {
-      console.log(res)
+  onSubmit() {
+    if (!this.imageList || this.imageList.length === 0) {
+      return;
+    }
+    const payload: any = new FormData();
+    this.imageList.forEach((image: any) => payload.append('file', image));
+    payload.append("name", this.productForm.get('name').value);
+    payload.append("weight", this.productForm.get('weight').value);
+    payload.append("price", this.productForm.get('price').value);
+    payload.append("shortDescription", this.productForm.get('shortDescription').value);
+    payload.append("category", this.productForm.get('category').value);
+    payload.append("subcategory", this.productForm.get('subcategory').value);
+    payload.append("stock", this.productForm.get('stock').value);
+    payload.append("type", this.productForm.get('type').value);
+    payload.append("brand", this.productForm.get('brand').value);
+    payload.append("packedge", this.productForm.get('packedge').value);
+    payload.append("manufacturer", this.productForm.get('manufacturer').value);
+    payload.append("description", this.productForm.get('description').value);
+    this.addProduct.createProduct(payload).subscribe(() => {
+      this.commonService.showSuccessToastMessage(`New Product added!`)
+    }, (error) => {
+      const msg = error.error.error.message
+      this.commonService.showErrorToastMessage(msg);
     })
   }
 
-  uploadFile(event: any) {
-    const file: any = (event.target as HTMLInputElement).files;
-    this.categoryForm.patchValue({
-      file: file.item(0)
-    });
-    // @ts-ignore
-    this.categoryForm.get('file').updateValueAndValidity()
+  imageUpload(files: any) {
+    this.imageList = this.uploadService.uploadFile(files)
   }
 
   onSubmitCategory() {
     const payload: any = new FormData();
-    // @ts-ignore
     payload.append("name", this.categoryForm.get('name').value);
-    // @ts-ignore
-    payload.append("file", this.categoryForm.get('file').value);
+    this.imageList.forEach((image: any) => payload.append('file', image));
     this.categoryService.createCategory(payload).subscribe(() => {
       this.commonService.showSuccessToastMessage(`New category added!`)
     }, (error) => {
@@ -152,7 +148,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
         this.commonService.showErrorToastMessage(msg)
       })
   }
-
 
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

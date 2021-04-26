@@ -1,27 +1,76 @@
-<div class="product-list">
-  <input type="text">
+<form class="product-list">
+  <div class="form-group form-inline">
+    Full text search:
+    <input class="form-control ml-2" type="text"
+           name="searchTerm" [(ngModel)]="service.searchTerm"/>
+    <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+  </div>
+
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Country</th>
-      <th scope="col">Area</th>
-      <th scope="col">Population</th>
+      <th scope="col">№</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+      <th scope="col" sortable="shopcode" (sort)="onSort($event)">Shop-Code</th>
+      <th scope="col" sortable="weight" (sort)="onSort($event)">Weight</th>
+      <th scope="col" sortable="type" (sort)="onSort($event)">Type</th>
+      <th scope="col" sortable="stock" (sort)="onSort($event)">Stock</th>
+      <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
+      <th scope="col" sortable="barcode" (sort)="onSort($event)">Bar-Code</th>
+      <th scope="col">Option</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let country of countries; index as i">
-      <th scope="row">{{ i + 1 }}</th>
+    <tr *ngFor="let product of products$ | async">
+      <th scope="row">{{ product.id }}</th>
       <td>
-        <img
-          [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
-          class="mr-2" style="width: 20px">
-        {{ country.name }}
+        <ngb-highlight [result]="product.name"
+                       [term]="service.searchTerm"></ngb-highlight>
       </td>
-      <td>{{ country.area | number }}</td>
-      <td>{{ country.population | number }}</td>
+      <td>
+        <ngb-highlight [result]="product.shopcode | number"
+                       [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="product.weight | number"
+                       [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="product.type"
+                       [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="product.stock"
+                       [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="product.price | number"
+                       [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="product.barcode | number"
+                       [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <button class="btn-primary">Edit</button>
+        <button class="btn-danger">Delete</button>
+      </td>
     </tr>
     </tbody>
   </table>
-</div>
 
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="(total$ | async)!" [(page)]="service.page"
+      [pageSize]="service.pageSize">
+    </ngb-pagination>
+
+    <select class="custom-select" style="width: auto" name="pageSize"
+            [(ngModel)]="service.pageSize">
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="15">15 items per page</option>
+    </select>
+  </div>
+
+</form>

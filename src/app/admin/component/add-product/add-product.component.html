@@ -2,11 +2,14 @@
   <form [formGroup]="productForm" class="row">
     <div class="product-form col-sm">
       <label>Name</label>
-      <input class="input" type="text" formControlName="name">
+      <input class="input" type="text" formControlName="name"
+             placeholder="name">
       <label>Weight</label>
-      <input class="input" type="text" formControlName="weight">
+      <input class="input" type="number" formControlName="weight"
+             placeholder="0.00" min="0">
       <label>Price</label>
-      <input class="input" type="number" formControlName="price">
+      <input class="input" type="number" formControlName="price"
+             placeholder="0.00" min="0" step="0.01">
       <label>Short Description</label>
       <textarea class="input-description" formControlName="shortDescription">
       </textarea>
@@ -37,13 +40,13 @@
       <input class="input" type="checkbox" name="name" formControlName="stock">
       <label>Type</label>
       <select class="select" name="name" formControlName="type">
-        <option value="1">LITER</option>
-        <option value="2">KG</option>
+        <option value="LITER">LITER</option>
+        <option value="KG">KG</option>
       </select>
-      <label>Штрихкод</label>
-      <input class="input" type="number" name="name" formControlName="stock">
+<!--      <label>Штрихкод</label>-->
+<!--      <input class="input" type="number" name="name" formControlName="stock">-->
     </div>
-    <div action="" class="character col-sm">
+    <div class="character col-sm">
       <label>Brand</label>
       <input class="input" type="text" name="name" formControlName="brand">
       <label>Packedge</label>
@@ -56,14 +59,15 @@
                 formControlName="description"></textarea>
       <button type="button" class="btn btn-outline-success"
               style="margin-top: 10px"
-              [disabled]="productForm.invalid"
-              (click)="onSubmit(productForm.value)">Add
+              [disabled]="categoryForm.invalid"
+              (click)="onSubmit()">Add
       </button>
     </div>
 
     <div class="image-form">
       <label>Image</label>
-      <input type='file' (change)="onSelectFile($event)" multiple>
+      <input #fileInput type='file' (change)="onSelectFile($event);
+      imageUpload(fileInput.files)" multiple formControlName="file">
       <div class="row-cols-3">
         <img class="col-6 col-md-4 p-2 card-img-top" style="max-height: 250px"
              *ngFor='let url of urls' [src]="url" height="200">
@@ -88,9 +92,9 @@
                    formControlName="name"
                    style="width: 400px">
           </div>
-          <label for="Image">Image</label>
-          <input type="file" formControlName="file"
-                 (change)="uploadFile($event)">
+          <label>Image</label>
+          <input #fileInput type="file" formControlName="file"
+                 (change)="imageUpload(fileInput.files)">
         </div>
       </div>
       <div class="modal-footer">
