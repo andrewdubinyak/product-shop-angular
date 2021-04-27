@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '', component: ShopComponent,
     children: [
       {
-        path: 'catalog', component: CatalogComponent, pathMatch: 'full',
+        path: '', component: CatalogComponent, pathMatch: 'full',
       },
       {
         path: 'sign-in', component: SignInComponent, pathMatch: 'full'
@@ -32,7 +32,7 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '**', redirectTo: 'catalog'}
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
