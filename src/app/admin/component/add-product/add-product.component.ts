@@ -106,6 +106,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     payload.append("category", this.productForm.get('category').value);
     payload.append("subcategory", this.productForm.get('subcategory').value);
     payload.append("stock", this.productForm.get('stock').value);
+    payload.append("barcode", this.productForm.get('barcode').value);
     payload.append("type", this.productForm.get('type').value);
     payload.append("brand", this.productForm.get('brand').value);
     payload.append("packedge", this.productForm.get('packedge').value);

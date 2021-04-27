@@ -10,10 +10,10 @@ import {ShopComponent} from "./shop.component";
 
 const routes: Routes = [
   {
-    path: 'shop', component: ShopComponent,
+    path: '', component: ShopComponent,
     children: [
       {
-        path: 'catalog', component: CatalogComponent,
+        path: 'catalog', component: CatalogComponent, pathMatch: 'full',
       },
       {
         path: 'sign-in', component: SignInComponent, pathMatch: 'full'
