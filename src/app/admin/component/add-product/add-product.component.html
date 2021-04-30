@@ -100,7 +100,8 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-success"
                 [disabled]="categoryForm.invalid"
-                (click)="onSubmitCategory()">Add
+                (click)="onSubmitCategory(); modal.close('Save click')">
+          Add
         </button>
       </div>
     </form>

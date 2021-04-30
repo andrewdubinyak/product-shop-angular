@@ -1,7 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategoryService} from "../../../services/category.service";
-import {SubCategoryService} from "../../../services/sub-category.service";
+import {
+  SubCategory,
+  SubCategoryService
+} from "../../../services/sub-category.service";
 import {CommonService} from "../../../services/common.service";
 import {Subject} from "rxjs";
 
@@ -34,11 +37,11 @@ export class AddSubCategoryComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(formObj: any) {
-    const payload = {
+    const subcategory: SubCategory = {
       category: formObj.category,
       name: formObj.name
     }
-    this.subCategoryService.createSubcategory(payload)
+    this.subCategoryService.createSubcategory(subcategory)
       .subscribe(
         () => {
           this.commonService.showSuccessToastMessage(`New ${formObj.name} for category added!`)

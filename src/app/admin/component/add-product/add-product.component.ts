@@ -3,9 +3,12 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../services/product.service";
 import {Subject} from "rxjs";
-import {CategoryService} from "../../../services/category.service";
+import {Category, CategoryService} from "../../../services/category.service";
 import {CommonService} from "../../../services/common.service";
-import {SubCategoryService} from "../../../services/sub-category.service";
+import {
+  SubCategory,
+  SubCategoryService
+} from "../../../services/sub-category.service";
 import {UploadService} from "../../../services/upload.service";
 
 @Component({
@@ -90,6 +93,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
       description: new FormControl('', {
         validators: [Validators.required]
       }),
+      barcode: new FormControl('', {
+        validators: [Validators.required]
+      }),
     });
   }
 
@@ -137,11 +143,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSubcategory(formObj: any) {
-    const payload = {
+    const subcategory: SubCategory = {
       category: formObj.category,
       name: formObj.name
     }
-    this.subCategoryService.createSubcategory(payload).subscribe(() => {
+    this.subCategoryService.createSubcategory(subcategory).subscribe(() => {
+        this.subcategories.push(subcategory)
         this.commonService.showSuccessToastMessage(`New ${formObj.name} added!`)
       },
       (error) => {

@@ -3,6 +3,10 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {map} from "rxjs/operators";
 
+export interface Category {
+  name?: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +28,3 @@ export class CategoryService {
     return this.http.post(environment.apiBaseUrl + '/catalog/new-category', category)
   }
 }
-
-
