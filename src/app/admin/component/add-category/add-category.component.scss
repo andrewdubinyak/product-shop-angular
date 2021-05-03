@@ -6,7 +6,6 @@
   border-radius: 10px;
   padding: 20px;
   justify-content: center;
-  height: 500px;
 }
 
 .category-form {
@@ -34,4 +33,19 @@
 .image-preview {
   max-width: 400px;
   max-height: 400px;
+}
+
+.func-btn-group {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.category-tabs {
+  background: #00072b;
+  flex-direction: row;
+  margin-bottom: 25px;
+}
+
+.btn{
+  margin-right: 40px;
 }

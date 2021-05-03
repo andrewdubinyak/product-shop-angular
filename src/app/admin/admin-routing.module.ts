@@ -19,13 +19,23 @@ const routes: Routes = [
         path:'dashboard', component: DashboardComponent,
       },
       {
-        path: 'add-product', component: AddProductComponent, pathMatch: 'full'
+        path: 'add-product', component: AddProductComponent, pathMatch: 'full',
+        children:[
+          {
+            path:'edit/:id', component: AddProductComponent, pathMatch: 'full',
+          }
+        ],
       },
       {
         path: 'product-list', component: ProductListComponent, pathMatch: 'full'
       },
       {
-        path: 'add-category', component: AddCategoryComponent, pathMatch: 'full'
+        path: 'add-category', component: AddCategoryComponent, pathMatch: 'full',
+        children: [
+          {
+            path: 'edit/:id', component: AddCategoryComponent, pathMatch: 'full'
+          }
+        ]
       },
       {
         path: 'category-list', component: CategoryListComponent, pathMatch: 'full'

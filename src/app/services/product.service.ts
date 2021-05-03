@@ -20,5 +20,9 @@ export class ProductService {
   createProduct(payload: any) {
     return this.http.post(environment.apiBaseUrl + '/product/new-product', payload);
   }
+
+  updateProduct(payload: any) {
+    return this.http.put(environment.apiBaseUrl+'/product/:id', payload)
+  }
 }
 

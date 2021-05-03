@@ -5,7 +5,8 @@
 export const environment = {
   apiBaseUrl: 'api',
   production: false,
-  apiProxy: 'http://localhost:8000'
+  apiProxy: 'http://localhost:8000',
+  s3Bucket: 'https://productshop.s3.eu-central-1.amazonaws.com/'
 };
 
 /*

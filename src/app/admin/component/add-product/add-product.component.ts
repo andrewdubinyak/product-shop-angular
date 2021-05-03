@@ -3,13 +3,14 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../services/product.service";
 import {Subject} from "rxjs";
-import {Category, CategoryService} from "../../../services/category.service";
+import {CategoryService} from "../../../services/category.service";
 import {CommonService} from "../../../services/common.service";
 import {
   SubCategory,
   SubCategoryService
 } from "../../../services/sub-category.service";
 import {UploadService} from "../../../services/upload.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-product',
@@ -26,16 +27,21 @@ export class AddProductComponent implements OnInit, OnDestroy {
   categories: any = [];
   subcategories: any = [];
   catMod: number | undefined;
-  imageList: any
+  imageList: any;
+  isAddMode: boolean = false;
+  id?: string;
+
 
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private addProduct: ProductService,
+    private productService: ProductService,
     private categoryService: CategoryService,
     private subCategoryService: SubCategoryService,
     private commonService: CommonService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.categoryForm = fb.group({
       name: new FormControl('', {
@@ -118,12 +124,16 @@ export class AddProductComponent implements OnInit, OnDestroy {
     payload.append("packedge", this.productForm.get('packedge').value);
     payload.append("manufacturer", this.productForm.get('manufacturer').value);
     payload.append("description", this.productForm.get('description').value);
-    this.addProduct.createProduct(payload).subscribe(() => {
+    this.productService.createProduct(payload).subscribe(() => {
       this.commonService.showSuccessToastMessage(`New Product added!`)
     }, (error) => {
       const msg = error.error.error.message
       this.commonService.showErrorToastMessage(msg);
     })
+  }
+
+  onUpdate(payload: any) {
+    this.productService.updateProduct(payload)
   }
 
   imageUpload(files: any) {
@@ -175,6 +185,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     }
   }
 
+
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
       const filesAmount = event.target.files.length;
@@ -201,6 +212,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
     this.categoryService.getAllCategory().subscribe(categories => {
       this.categories = categories
     })
