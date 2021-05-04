@@ -7,15 +7,16 @@ import {AdminComponent} from './admin.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {AddProductComponent} from './component/add-product/add-product.component';
 import {ProductListComponent} from './component/product-list/product-list.component';
-import {AddCategoryComponent} from './component/add-category/add-category.component';
 import {AddSubCategoryComponent} from './component/add-sub-category/add-sub-category.component';
 import {AdminHeaderMenuComponent} from './component/admin-header-menu/admin-header-menu.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AdminLoginComponent} from './component/admin-login/admin-login.component';
 import {ToastsContainer} from "../core/component/toast/toast.component";
-import {CategoryListComponent} from './component/category-list/category-list.component';
 import {NgSelectModule} from "@ng-select/ng-select";
 import {NgbdSortableHeader} from "../services/sortable.directive";
+import {CategoryListComponent} from './component/category-list/category-list.component';
+import {AddCategoryComponent} from "./component/add-category/add-category.component";
+import {CategoryComponent} from './component/category/category.component';
 
 
 @NgModule({
@@ -29,8 +30,9 @@ import {NgbdSortableHeader} from "../services/sortable.directive";
     AdminHeaderMenuComponent,
     AdminLoginComponent,
     ToastsContainer,
-    CategoryListComponent,
     NgbdSortableHeader,
+    CategoryListComponent,
+    CategoryComponent,
   ],
   imports: [
     CommonModule,

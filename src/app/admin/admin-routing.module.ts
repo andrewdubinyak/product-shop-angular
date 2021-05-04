@@ -9,6 +9,7 @@ import {AdminLoginComponent} from "./component/admin-login/admin-login.component
 import {AuthGuard} from "../guards/auth.guard";
 import {AdminComponent} from "./admin.component";
 import {CategoryListComponent} from "./component/category-list/category-list.component";
+import {CategoryComponent} from "./component/category/category.component";
 
 const routes: Routes = [
   {
@@ -16,32 +17,36 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path:'dashboard', component: DashboardComponent,
+        path: 'dashboard', component: DashboardComponent,
       },
       {
-        path: 'add-product', component: AddProductComponent, pathMatch: 'full',
-        children:[
-          {
-            path:'edit/:id', component: AddProductComponent, pathMatch: 'full',
-          }
-        ],
+        path: 'product', component: AddProductComponent, pathMatch: 'full',
+      },
+      {
+        path: 'product/edit/:id',
+        component: AddProductComponent,
+        pathMatch: 'full',
       },
       {
         path: 'product-list', component: ProductListComponent, pathMatch: 'full'
       },
+
       {
-        path: 'add-category', component: AddCategoryComponent, pathMatch: 'full',
+        path: 'category', component: CategoryComponent,
         children: [
           {
+            path: '', component: CategoryListComponent, pathMatch: 'full'
+          },
+          {
+            path: 'add', component: AddCategoryComponent, pathMatch: 'full'
+          },
+          {
             path: 'edit/:id', component: AddCategoryComponent, pathMatch: 'full'
-          }
+          },
         ]
       },
       {
-        path: 'category-list', component: CategoryListComponent, pathMatch: 'full'
-      },
-      {
-        path: 'add-sub-category',
+        path: 'sub-category',
         component: AddSubCategoryComponent,
         pathMatch: 'full'
       }

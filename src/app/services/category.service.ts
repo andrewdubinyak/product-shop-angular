@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {map} from "rxjs/operators";
 import {Category} from "../models/category";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Injectable({
@@ -17,9 +18,19 @@ export class CategoryService {
   }
 
   getAllCategory() {
-    return this.http.get<Category[]>(environment.apiBaseUrl + '/catalog').pipe(map((res: any) => {
-      return res.categories;
-    }));
+    return this.http.get<Category[]>(environment.apiBaseUrl + '/catalog')
+      .pipe(map((res: any) => {
+        return res.categories;
+      }));
+  }
+
+  getById(id: ActivatedRoute | null) {
+    return this.http.get(environment.apiBaseUrl + '/catalog/' + id)
+      .pipe(map(res => {
+        // @ts-ignore
+        return res.category
+      }))
+
   }
 
   createCategory(category: any) {

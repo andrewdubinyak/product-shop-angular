@@ -5,7 +5,8 @@ import {CategoryService} from "../../../services/category.service";
 import {CommonService} from "../../../services/common.service";
 import {ImageService} from "../../../services/image.service";
 import {UploadService} from "../../../services/upload.service";
-import {Category} from "../../../models/category";
+import {ActivatedRoute} from "@angular/router";
+import {first} from "rxjs/operators";
 
 
 @Component({
@@ -14,8 +15,9 @@ import {Category} from "../../../models/category";
   styleUrls: ['./add-category.component.scss']
 })
 export class AddCategoryComponent implements OnInit {
+  id!: ActivatedRoute | null;
+  isAddMode!: boolean;
   urls: any;
-  categories: Category[] = [];
   closeResult = '';
   categoryForm: any = FormGroup;
   imageForm: any = FormGroup;
@@ -30,6 +32,7 @@ export class AddCategoryComponent implements OnInit {
     private categoryService: CategoryService,
     private commonService: CommonService,
     private uploadService: UploadService,
+    private route: ActivatedRoute,
   ) {
     this.imageForm = fb.group({
       file: new FormControl('', {
@@ -66,20 +69,12 @@ export class AddCategoryComponent implements OnInit {
     this.categoryService.createCategory(category)
       .subscribe(
         () => {
-          this.categories.push(category)
           this.commonService.showSuccessToastMessage(`New category added!`)
         },
         error => {
           const msg = error.error.error.message
           this.commonService.showErrorToastMessage(msg);
         })
-  }
-
-  onDelete(id: number) {
-    this.categoryService.deleteCategory(id).subscribe(() => {
-      this.categories = this.categories.filter(item => item.id !== id);
-      this.commonService.showSuccessToastMessage(`Category successfully deleted!`)
-    })
   }
 
   onSelectFile(event: any) {
@@ -97,12 +92,18 @@ export class AddCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoryService.getAllCategory().subscribe((data: Category[]) => {
-      this.categories = data
-    })
+    this.id = this.route.snapshot.params['id']
+    console.log(this.id)
+    this.isAddMode = !this.id;
+
     this.imageService.getAllImage().subscribe(res => {
       this.imageCategory = res
     })
-  }
 
+    if (!this.isAddMode) {
+      this.categoryService.getById(this.id)
+        .pipe(first())
+        .subscribe(x => this.categoryForm.patchValue(x));
+    }
+  }
 }
