@@ -77,6 +77,22 @@ export class AddCategoryComponent implements OnInit {
         })
   }
 
+  onUpdate(formObj: any) {
+    const id = this.id
+    const category: any = {
+      name: formObj.name,
+      image: formObj.image
+    }
+    this.categoryService.updateCategory(id, category)
+      .subscribe(() => {
+          this.commonService.showSuccessToastMessage(`Category ${category.name} updated`)
+        },
+        error => {
+          const msg = error.error.error.message
+          this.commonService.showErrorToastMessage(`Category ${category.name} alredy exist`);
+        })
+  }
+
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -93,7 +109,6 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id']
-    console.log(this.id)
     this.isAddMode = !this.id;
 
     this.imageService.getAllImage().subscribe(res => {
@@ -103,7 +118,10 @@ export class AddCategoryComponent implements OnInit {
     if (!this.isAddMode) {
       this.categoryService.getById(this.id)
         .pipe(first())
-        .subscribe(x => this.categoryForm.patchValue(x));
+        .subscribe(x => {
+          this.categoryForm.patchValue(x)
+          this.urls = x.image
+        });
     }
   }
 }

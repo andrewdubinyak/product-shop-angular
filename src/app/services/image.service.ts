@@ -22,6 +22,14 @@ export class ImageService {
       }))
   }
 
+  multiUploadImage(image: any) {
+    return this.http
+      .post(environment.apiBaseUrl + '/image/multi-upload-image', image)
+      .pipe(map(res => {
+        return res
+      }))
+  }
+
   getAllImage() {
     return this.http
       .get(environment.apiBaseUrl + '/image/all-image')

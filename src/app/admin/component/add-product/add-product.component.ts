@@ -11,6 +11,7 @@ import {
 } from "../../../services/sub-category.service";
 import {UploadService} from "../../../services/upload.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ImageService} from "../../../services/image.service";
 
 @Component({
   selector: 'app-add-product',
@@ -21,11 +22,13 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private subscriptionDestroyed$: Subject<void> = new Subject<void>();
   urls = [];
   closeResult = '';
+  imageForm: any = FormGroup;
   productForm: any = FormGroup;
   categoryForm: any = FormGroup;
   subcategoryForm: FormGroup;
   categories: any = [];
   subcategories: any = [];
+  imageProduct: any =[];
   catMod: number | undefined;
   imageList: any;
   isAddMode: boolean = false;
@@ -35,6 +38,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
+    private imageService: ImageService,
     private productService: ProductService,
     private categoryService: CategoryService,
     private subCategoryService: SubCategoryService,
@@ -43,6 +47,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
   ) {
+    this.imageForm = fb.group({
+      file: new FormControl('', {
+        validators: [Validators.required],
+      })
+    })
     this.categoryForm = fb.group({
       name: new FormControl('', {
         validators: [Validators.required]
@@ -105,26 +114,37 @@ export class AddProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit() {
-    if (!this.imageList || this.imageList.length === 0) {
-      return;
-    }
+  uploadImage() {
     const payload: any = new FormData();
     this.imageList.forEach((image: any) => payload.append('file', image));
-    payload.append("name", this.productForm.get('name').value);
-    payload.append("weight", this.productForm.get('weight').value);
-    payload.append("price", this.productForm.get('price').value);
-    payload.append("shortDescription", this.productForm.get('shortDescription').value);
-    payload.append("category", this.productForm.get('category').value);
-    payload.append("subcategory", this.productForm.get('subcategory').value);
-    payload.append("stock", this.productForm.get('stock').value);
-    payload.append("barcode", this.productForm.get('barcode').value);
-    payload.append("type", this.productForm.get('type').value);
-    payload.append("brand", this.productForm.get('brand').value);
-    payload.append("packedge", this.productForm.get('packedge').value);
-    payload.append("manufacturer", this.productForm.get('manufacturer').value);
-    payload.append("description", this.productForm.get('description').value);
-    this.productService.createProduct(payload).subscribe(() => {
+    this.imageService.multiUploadImage(payload).subscribe(res => {
+      this.imageProduct.push(res)
+    })
+  }
+
+  onSubmit(formObj: any) {
+
+    const product = {
+      name: formObj.name,
+      weight: formObj.weight,
+      price: formObj.price,
+      shortDescription: formObj.shortDescription,
+      category: formObj.category,
+      subcategory: formObj.subcategory,
+      stock: formObj.stock,
+      barcode: formObj.barcode,
+      type: formObj.type,
+      brand: formObj.brand,
+      packedge: formObj.packedge,
+      manufacturer: formObj.manufacturer,
+      description: formObj.description,
+      image: formObj.image,
+    }
+    // if (!this.imageList || this.imageList.length === 0) {
+    //   return;
+    // }
+    // this.imageList.forEach((image: any) => payload.append('file', image));
+    this.productService.createProduct(product).subscribe(() => {
       this.commonService.showSuccessToastMessage(`New Product added!`)
     }, (error) => {
       const msg = error.error.error.message

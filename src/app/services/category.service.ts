@@ -27,14 +27,22 @@ export class CategoryService {
   getById(id: ActivatedRoute | null) {
     return this.http.get(environment.apiBaseUrl + '/catalog/' + id)
       .pipe(map(res => {
-        // @ts-ignore
-        return res.category
+        return {
+          // @ts-ignore
+          name: res.category.name,
+          // @ts-ignore
+          image: res.category.image.originalImageUrl
+        }
       }))
 
   }
 
   createCategory(category: any) {
     return this.http.post(environment.apiBaseUrl + '/catalog/new-category', category)
+  }
+
+  updateCategory(id: ActivatedRoute | null, category: any) {
+    return this.http.put(environment.apiBaseUrl + '/catalog/' + id, category)
   }
 
   deleteCategory(id: number) {
