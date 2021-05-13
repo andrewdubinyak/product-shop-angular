@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from "../../../services/category.service";
+import {CategoryService} from '../../../services/category.service';
 
 @Component({
   selector: 'app-catalog',
@@ -15,10 +15,9 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.getAllCategory().subscribe(res => {
-      this.categories = res
-      console.log(res)
-    })
+    this.categoryService.getAllCategory().subscribe((res: any) => {
+      this.categories = res;
+    });
 
   }
 

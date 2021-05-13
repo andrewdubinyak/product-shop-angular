@@ -3,8 +3,7 @@
     <div class="col-6 col-md-4 p-2" *ngFor="let category of categories">
       <div class="catalog-card card">
         <img class="card-img-top" style="max-height: 250px"
-             src="{{category.image.originalImageUrl}}"
-             alt="Card image cap">
+             src="{{category.image.image}}">
         <div class="card-body">
           <p class="card-text">{{category.name}}</p>
         </div>
