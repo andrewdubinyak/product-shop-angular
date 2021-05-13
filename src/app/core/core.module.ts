@@ -3,9 +3,9 @@ import {CommonModule} from '@angular/common';
 import {FooterComponent} from './component/footer/footer.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
-import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
-import {RouterModule} from "@angular/router";
-import {SidebarModule} from "ng-sidebar";
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import {RouterModule} from '@angular/router';
+import {SidebarModule} from 'ng-sidebar';
 
 
 @NgModule({
