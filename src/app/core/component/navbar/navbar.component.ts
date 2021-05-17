@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CategoryService} from '../../../services/category.service';
+import {SubCategoryService} from '../../../services/sub-category.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,12 +11,23 @@ export class NavbarComponent implements OnInit {
   showFiller = false;
   public isMenuCollapsed = true;
   opened = false;
-  left = 'left'
+  left = 'left';
+  categories: any = [];
 
-  toggleSidebar() {
-    this.opened = !this.opened
+  constructor(private categoryService: CategoryService) {
   }
 
-  ngOnInit() {
+  toggleSidebar(): any {
+    this.opened = !this.opened;
+  }
+
+  ngOnInit(): void {
+    this.categoryService.getAllCategory().subscribe((res: any) => {
+      res.map((category: any) => {
+        this.categories.push(category);
+      });
+    });
+
+
   }
 }

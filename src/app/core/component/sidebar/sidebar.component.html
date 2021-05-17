@@ -12,19 +12,14 @@
                   data-bs-toggle="collapse" data-bs-target="#collapseOne"
                   aria-expanded="true" aria-controls="collapseOne"
                   style="border-radius: 0">
-            Category
+            Категорії
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show"
              aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body" style="border-radius: 0">
-            <ul>
-              <li>1</li>
-              <li>1</li>
-              <li>1</li>
-              <li>1</li>
-              <li>1</li>
-              <li>1</li>
+            <ul *ngFor="let category of categories">
+              <li>{{category.name}}</li>
             </ul>
           </div>
         </div>
