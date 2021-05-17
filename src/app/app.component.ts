@@ -10,12 +10,9 @@ export class AppComponent {
   showFiller = false;
   public isMenuCollapsed = true;
   opened = false;
-  left = 'left'
+  left = 'left';
 
-  toggleSidebar() {
-    this.opened = !this.opened
-  }
-
-  ngOnInit() {
+  toggleSidebar(): any {
+    this.opened = !this.opened;
   }
 }
