@@ -16,7 +16,10 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe((res: any) => {
-      this.categories = res;
+      console.log(res);
+      res.map((category: any) => {
+        this.categories.push(category);
+      });
     });
 
   }

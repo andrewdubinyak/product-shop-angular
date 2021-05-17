@@ -34,16 +34,4 @@ export class CategoryService {
 
   }
 
-  createCategory(category: any) {
-    return this.http.post(environment.apiBaseUrl + '/catalog/new-category', category);
-  }
-
-  updateCategory(id: ActivatedRoute | null, category: any) {
-    return this.http.put(environment.apiBaseUrl + '/catalog/' + id, category);
-  }
-
-  deleteCategory(id: number) {
-    return this.http
-      .delete(environment.apiBaseUrl + '/catalog/' + id);
-  }
 }
