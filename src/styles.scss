@@ -30,6 +30,12 @@ i {
   background: none;
   margin: 2px;
   outline: none;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center
 }
 
 .icon-button:before {
