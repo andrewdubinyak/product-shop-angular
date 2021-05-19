@@ -3,35 +3,36 @@
     <i class="bi bi-list"></i>
   </button>
   <a class="navbar-brand" [routerLink]="''">Product Shop</a>
-  <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
   <button class="icon-button navbar-toggler"
           (click)="isMenuCollapsed = !isMenuCollapsed">
     <i class="bi bi-three-dots-vertical" style="font-size: 1rem"></i>
   </button>
-  <!-- Step 2: Add the ngbCollapse directive to the element below. -->
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
     <div class="navbar-nav">
-      <!-- Step 4: Close the menu when a link is clicked. -->
       <div class="input-group mb-1">
-        <span class="input-group-text"
-              style="background: #272b3f; border: none; border-radius: 0.25rem 0 0 0.25rem;">
+        <span class="input-group-text">
           <i class="bi bi-search" style="font-size: 1rem"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Search..."
-               style="background: #272b3f; border: none; color: white;
-               outline: none;" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" placeholder="Пошук..."
+               aria-describedby="basic-addon1">
       </div>
     </div>
   </div>
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse"
        style="flex-flow: row-reverse">
     <div [ngbCollapse]="isMenuCollapsed" class="collapse-button">
-      <button type="button" class="icon-button" [routerLink]="'cart'">
-        <i class="bi bi-basket"></i>
-      </button>
-      <button type="button" class="icon-button" [routerLink]="'sign-in'">
-        <i class="bi bi-person-circle"></i>
-      </button>
+      <div class="btn-group-navbar">
+        <button type="button" class="icon-button" [routerLink]="'cart'">
+          <i class="bi bi-basket"></i>
+        </button>
+        <span>Корзина</span>
+      </div>
+      <div class="profile-button-group btn-group-navbar">
+        <button type="button" class="icon-button" [routerLink]="'sign-in'">
+          <i class="bi bi-person-circle"></i>
+        </button>
+        <span>Профіль</span>
+      </div>
     </div>
   </div>
 </nav>
@@ -41,27 +42,31 @@
       <button class="icon-button" (click)="toggleSidebar()">
         <i class="bi bi-x"></i>
       </button>
+      <a class="navbar-brand" [routerLink]="''">LOGO</a>
     </div>
-    <div class="accordion" id="accordionExample">
-      <div class="accordion-item" style="border-radius: 0"
-           *ngFor="let category of categories">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne"
-                  style="border-radius: 0">
-            {{category.name}}
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show"
-             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-          <div class="accordion-body" style="border-radius: 0">
-            <ul *ngFor="let subCategory of category.sub_categories">
-              <li>{{subCategory.name}}</li>
-            </ul>
+    <ngb-accordion *ngFor="let category of categories"
+                   (panelChange)="toggleAccordion($event, category.id)">
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <div class="accordion-btn">
+            <span>{{category.name}}</span>
+            <div class="collapse-icon">
+              <i *ngIf="!isContentOpen[category.id]" class="bi bi-plus"
+                 style="color: black"></i>
+              <i *ngIf="isContentOpen[category.id]" class="bi bi-dash"
+                 style="color: black"></i>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div style="display: flex;flex-flow: column"
+               *ngFor="let subCategory of category.sub_categories">
+            <button class="menu-button button" [routerLink]="['product']">
+              <span>{{subCategory.name}}</span>
+            </button>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
   </ng-sidebar>
 </ng-sidebar-container>
