@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../../services/category.service';
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-catalog',
@@ -8,10 +9,12 @@ import {CategoryService} from '../../../services/category.service';
 })
 export class CatalogComponent implements OnInit {
   categories: any = [];
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/1300/400`);
 
-  constructor(
-    private categoryService: CategoryService
-  ) {
+  constructor(private categoryService: CategoryService,
+              config: NgbCarouselConfig) {
+    config.interval = 4000;
+    config.wrap = true;
   }
 
   ngOnInit(): void {

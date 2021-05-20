@@ -1,43 +1,5 @@
-<nav class="navbar navbar-expand-sm navbar-dark">
-  <button class="icon-button" (click)="toggleSidebar()">
-    <i class="bi bi-list"></i>
-  </button>
-  <a class="navbar-brand" [routerLink]="''">Product Shop</a>
-  <button class="icon-button navbar-toggler"
-          (click)="isMenuCollapsed = !isMenuCollapsed">
-    <i class="bi bi-three-dots-vertical" style="font-size: 1rem"></i>
-  </button>
-  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-    <div class="navbar-nav">
-      <div class="input-group mb-1">
-        <span class="input-group-text">
-          <i class="bi bi-search" style="font-size: 1rem"></i>
-        </span>
-        <input type="text" class="form-control" placeholder="Пошук..."
-               aria-describedby="basic-addon1">
-      </div>
-    </div>
-  </div>
-  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse"
-       style="flex-flow: row-reverse">
-    <div [ngbCollapse]="isMenuCollapsed" class="collapse-button">
-      <div class="btn-group-navbar">
-        <button type="button" class="icon-button" [routerLink]="'cart'">
-          <i class="bi bi-basket"></i>
-        </button>
-        <span>Корзина</span>
-      </div>
-      <div class="profile-button-group btn-group-navbar">
-        <button type="button" class="icon-button" [routerLink]="'sign-in'">
-          <i class="bi bi-person-circle"></i>
-        </button>
-        <span>Профіль</span>
-      </div>
-    </div>
-  </div>
-</nav>
 <ng-sidebar-container>
-  <ng-sidebar [(opened)]="opened">
+  <ng-sidebar [(opened)]="opened" mode="over">
     <div class="sidebar-header">
       <button class="icon-button" (click)="toggleSidebar()">
         <i class="bi bi-x"></i>
@@ -69,4 +31,45 @@
       </ngb-panel>
     </ngb-accordion>
   </ng-sidebar>
+  <div ng-sidebar-content>
+    <nav class="navbar navbar-expand-sm navbar-dark">
+      <button class="icon-button" (click)="toggleSidebar()">
+        <i class="bi bi-list"></i>
+      </button>
+      <a class="navbar-brand" [routerLink]="''">Product Shop</a>
+      <button class="icon-button navbar-toggler"
+              (click)="isMenuCollapsed = !isMenuCollapsed">
+        <i class="bi bi-three-dots-vertical" style="font-size: 1rem"></i>
+      </button>
+      <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+        <div class="navbar-nav">
+          <div class="input-group mb-1">
+        <span class="input-group-text">
+          <i class="bi bi-search" style="font-size: 1rem"></i>
+        </span>
+            <input type="text" class="form-control" placeholder="Пошук..."
+                   aria-describedby="basic-addon1">
+          </div>
+        </div>
+      </div>
+      <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse"
+           style="flex-flow: row-reverse">
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse-button">
+          <div class="btn-group-navbar">
+            <button type="button" class="icon-button" [routerLink]="'cart'">
+              <i class="bi bi-basket"></i>
+            </button>
+            <span>Корзина</span>
+          </div>
+          <div class="profile-button-group btn-group-navbar">
+            <button type="button" class="icon-button" [routerLink]="'sign-in'">
+              <i class="bi bi-person-circle"></i>
+            </button>
+            <span>Профіль</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
 </ng-sidebar-container>

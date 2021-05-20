@@ -7,9 +7,8 @@ import {Options} from '@angular-slider/ngx-slider';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  public isMenuCollapsed = true;
-  minValue: number = 50;
-  maxValue: number = 200;
+  minValue = 50;
+  maxValue = 200;
   options: Options = {
     floor: 0,
     ceil: 250
@@ -17,8 +16,8 @@ export class ProductComponent implements OnInit {
 
   opened = false;
 
-  toggleSidebar() {
-    this.opened = !this.opened
+  toggleSidebar(): any {
+    this.opened = !this.opened;
   }
 
   constructor() {

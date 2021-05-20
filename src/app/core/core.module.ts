@@ -25,7 +25,7 @@ import {SidebarModule} from 'ng-sidebar';
     CommonModule,
     NgbCollapseModule,
     RouterModule,
-    SidebarModule,
+    SidebarModule.forRoot(),
     NgbAccordionModule
   ]
 })

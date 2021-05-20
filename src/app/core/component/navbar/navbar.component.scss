@@ -4,7 +4,7 @@
   position: relative;
   background: #00072b;
   color: #ffffff;
-  z-index: 2;
+  //z-index: 2;
 }
 
 .collapse-button {
@@ -40,7 +40,7 @@
 /* Sidebar */
 ng-sidebar-container {
   height: 100%;
-  position: absolute;
+  //position: absolute;
   top: 0;
   left: 0;
   display: block;
@@ -49,8 +49,7 @@ ng-sidebar-container {
 ::ng-deep .ng-sidebar {
   background: #ffffff;
   width: 340px;
-  position: absolute;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .sidebar-header {
