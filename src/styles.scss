@@ -19,6 +19,7 @@ i {
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 
 /* Icon Button */
@@ -81,3 +82,6 @@ i {
   top: 6px;
   left: 6px;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

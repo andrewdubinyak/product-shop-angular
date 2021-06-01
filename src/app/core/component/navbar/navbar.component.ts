@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../../services/category.service';
-import {SubCategoryService} from '../../../services/sub-category.service';
 import {NgbPanelChangeEvent} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SignInComponent} from '../../../shop/component/sign-in/sign-in.component';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,9 @@ export class NavbarComponent implements OnInit {
   categories: any = [];
   panelId: any;
 
-  constructor(private categoryService: CategoryService) {
+
+  constructor(private categoryService: CategoryService,
+              private modalService: NgbModal) {
   }
 
   toggleSidebar(): any {
@@ -29,13 +32,23 @@ export class NavbarComponent implements OnInit {
     this.isContentOpen[idAccordion] = event.nextState;
   }
 
+  openSignInModal(): any {
+    const modalRef = this.modalService.open(SignInComponent, {
+      centered: true, windowClass: 'modal-signIn'
+    });
+
+    modalRef.result.then((result) => {
+      console.log(result);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe((res: any) => {
       res.map((category: any) => {
         this.categories.push(category);
       });
     });
-
-
   }
 }

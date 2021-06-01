@@ -1,13 +1,25 @@
 @import "./src/app/app.component";
 
-.page-content {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
+::ng-deep .modal-signIn .modal-dialog {
+  max-width: 350px;
+}
+
+.modal-header {
+  display: block;
+  border: none;
+  text-align: center;
+}
+
+.modal-footer {
+  border: none;
+}
+
+.modal-body {
+  padding: 0;
   width: 100%;
   height: 100%;
-  background-color: #00072bad;
+  border: none;
+  border-radius: 2px;
 }
 
 .block-login {
@@ -47,7 +59,7 @@
 .form-login {
   display: flex;
   flex-flow: column;
-  margin: 20px
+  margin: 0 20px 20px 20px
 }
 
 .input-group-block {
@@ -57,10 +69,9 @@
 }
 
 .input-group-block > label {
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
   margin-top: 14px;
 }
 
@@ -69,23 +80,16 @@
   display: flex;
 }
 
-.input-phone {
-  width: 200px;
-  height: 40px;
-  border: none;
-  border-radius: 0 5px 5px 0;
-  font-size: 18px;
-  text-align: left;
-}
-
-.input-password {
+input {
   padding-top: 2px;
-  width: 250px;
+  width: 100%;
   height: 40px;
-  border: none;
+  border: 1px solid #e6e5e5;
   border-radius: 5px;
   font-size: 18px;
   text-align: left;
+  outline: none;
+
 }
 
 .btg-login {

@@ -9,6 +9,7 @@ import {ShopComponent} from './shop/shop.component';
 import {ShopModule} from './shop/shop.module';
 import {JwtInterceptor} from './interceptors/auth.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     CoreModule,
     ShopModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

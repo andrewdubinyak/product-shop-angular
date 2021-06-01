@@ -20,6 +20,7 @@ import {NgStepperModule} from 'angular-ng-stepper';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CartModule} from './component/cart/cart.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgSelectModule} from "@ng-select/ng-select";
 
 
 @NgModule({
@@ -33,21 +34,22 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   exports: [
     CatalogComponent
   ],
-  imports: [
-    CommonModule,
-    ShopRoutingModule,
-    CoreModule,
-    FormsModule,
-    NgxSliderModule,
-    SidebarModule,
-    NgbRatingModule,
-    NgbNavModule,
-    NgStepperModule,
-    CdkStepperModule,
-    CartModule,
-    NgbCarouselModule,
-    NgbModule
-  ]
+    imports: [
+        CommonModule,
+        ShopRoutingModule,
+        CoreModule,
+        FormsModule,
+        NgxSliderModule,
+        SidebarModule,
+        NgbRatingModule,
+        NgbNavModule,
+        NgStepperModule,
+        CdkStepperModule,
+        CartModule,
+        NgbCarouselModule,
+        NgbModule,
+        NgSelectModule
+    ]
 })
 export class ShopModule {
 }

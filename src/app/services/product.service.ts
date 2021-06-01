@@ -13,16 +13,12 @@ export class ProductService {
   ) {
   }
 
-  getAllProduct() {
-    return this.http.get(environment.apiBaseUrl + '/product');
+  getAllProduct(): any {
+    return this.http.get(environment.apiBaseUrl + '/products');
   }
 
-  createProduct(payload: any) {
-    return this.http.post(environment.apiBaseUrl + '/product/new-product', payload);
-  }
-
-  updateProduct(payload: any) {
-    return this.http.put(environment.apiBaseUrl+'/product/:id', payload)
+  getById(id: number): any {
+    return this.http.get(environment.apiBaseUrl + `/products/${id}`);
   }
 }
 
