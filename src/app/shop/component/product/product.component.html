@@ -76,7 +76,7 @@
             </div>
             <div *ngFor="let image of product.image"
                  [routerLink]="['../product-detail', product.id]">
-              <img class="img-fluid" [src]="image.image_url">
+              <img class="img-fluid" [src]="image.image">
             </div>
             <p>{{product.name}}</p>
           </div>
