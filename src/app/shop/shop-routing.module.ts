@@ -22,7 +22,7 @@ const routes: Routes = [
         path: 'sign-up', component: SignUpComponent, pathMatch: 'full'
       },
       {
-        path: 'product', component: ProductComponent, pathMatch: 'full'
+        path: 'product/:id', component: ProductComponent, pathMatch: 'full'
       },
       {
         path: 'product-detail/:id',
@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'cart', component: CartComponent, pathMatch: 'full'
-      }
+      },
     ]
   },
   {path: '**', redirectTo: ''}

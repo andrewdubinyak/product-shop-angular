@@ -1,8 +1,6 @@
 <div class="container-lg">
   <div class="product-block">
-<!--    <div class="product-header">-->
-<!--      <h1>HEADER</h1>-->
-<!--    </div>-->
+    <h2>{{headerName}}</h2>
     <div class="product-filter d-none d-md-block d-lg-block">
       <ngb-accordion *ngFor="let category of categories"
                      (panelChange)="toggleAccordion($event, category.id)">
@@ -22,8 +20,7 @@
           <ng-template ngbPanelContent>
             <div style="display: flex;flex-flow: column"
                  *ngFor="let subCategory of category.sub_categories">
-              <a class="text-link"
-                 [routerLink]="['product']">{{subCategory.name}}</a>
+              <a class="text-link">{{subCategory.name}}</a>
             </div>
           </ng-template>
         </ngb-panel>
@@ -51,12 +48,12 @@
       <ng-select [items]="cities"
                  bindLabel="name"
                  [(ngModel)]="selectedCity"
-      style="width: 240px">
+                 style="width: 240px">
       </ng-select>
-<!--      <button class="icon-button d-md-none d-sm-block"-->
-<!--              (click)="toggleSidebar()">-->
-<!--        <i class="bi bi-filter-square" style="color: black"></i>-->
-<!--      </button>-->
+      <!--      <button class="icon-button d-md-none d-sm-block"-->
+      <!--              (click)="toggleSidebar()">-->
+      <!--        <i class="bi bi-filter-square" style="color: black"></i>-->
+      <!--      </button>-->
       <div class="right-button">
         <button class="icon-button">
           <i class="bi bi-grid-3x3-gap-fill" style="color: black"></i>

@@ -1,0 +1,73 @@
+<div class="container-lg">
+  <div class="header">
+    <h1>Особистий кабінет</h1>
+    <div class="log-out">
+      <span style="margin-right: 10px">Вийти з особистого кабінету</span>
+      <button class="icon-button">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="data">
+    <div class="panel">
+      <button class="profile-button">
+        <i class="bi bi-person"></i>
+        Особисті дані
+      </button>
+      <div>
+        <hr>
+      </div>
+      <button class="profile-button">
+        <i class="bi bi-clock-history"></i>
+        Історія замовлень
+      </button>
+      <div>
+        <hr>
+      </div>
+      <button class="profile-button">
+        <i class="bi bi-cash-stack"></i>
+        Бонусна програма
+      </button>
+      <div>
+        <hr>
+      </div>
+      <button class="profile-button">
+        <i class="bi bi-geo-alt"></i>
+        Мої адреси
+      </button>
+      <div>
+        <hr>
+      </div>
+    </div>
+    <div class="form-group" *ngFor="let profile of user">
+      <form class="form" [formGroup]="profileForm" novalidate>
+        <div>
+          <h4>Змінити особисті дані</h4>
+          <hr>
+        </div>
+        <label for="">ІМ'Я</label>
+        <input type="text" placeholder="{{profile.first_name}}"
+               [ngClass]="{'is-invalid':profileForm.controls['first_name'].invalid && (profileForm.controls['first_name'].dirty || profileForm.controls['first_name'].touched)}"
+               formControlName="first_name">
+        <label for="">ПРІЗВИЩЕ</label>
+        <input type="text" placeholder="{{profile.last_name}}"
+               [ngClass]="{'is-invalid':profileForm.controls['last_name'].invalid && (profileForm.controls['last_name'].dirty || profileForm.controls['last_name'].touched)}"
+               formControlName="last_name">
+        <label for="">E-MAIL</label>
+        <input type="email" placeholder="{{profile.email}}"
+               [ngClass]="{'is-invalid':profileForm.controls['email'].invalid && (profileForm.controls['email'].dirty || profileForm.controls['email'].touched)}"
+               formControlName="email">
+        <label for="">ТЕЛЕФОН</label>
+        <input prefix="+380" [mask]="'-000-000-000'"
+               [ngClass]="{'is-invalid':profileForm.controls['phone_number'].invalid && (profileForm.controls['phone_number'].dirty || profileForm.controls['phone_number'].touched)}"
+               formControlName="phone_number"
+               placeholder="телефонний номер">
+        <button class="btn-edit">
+          <i class="bi bi-pen"></i>
+          <a>Зберегти</a>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@ import {UserInterface} from '../models/user.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class ProfileService {
   private userSubject: BehaviorSubject<UserInterface>;
   public user: Observable<UserInterface>;
 
@@ -28,24 +28,12 @@ export class AuthService {
     if (loggedInUser) {
       return true;
     } else {
-      this.router.navigateByUrl('catalog');
+      this.router.navigateByUrl('admin/log-in');
       return false;
     }
   }
 
-  signIn(payload: any): any {
-    return this.http.post(environment.apiAuthUrl + '/login/', payload);
-  }
-
-  signUp(payload: any): any {
-    return this.http.post(environment.apiAuthUrl + '/register/', payload);
-  }
-
-  forgotPassword(payload: any): any {
-    return this.http.post(environment.apiBaseUrl + '/auth/forgot-password', payload);
-  }
-
-  public get userValue(): UserInterface {
-    return this.userSubject.value;
+  getProfile(): any {
+    return this.http.get(environment.apiAuthUrl + '/profile/');
   }
 }

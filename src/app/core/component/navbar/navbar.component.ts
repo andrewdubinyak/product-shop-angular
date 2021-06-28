@@ -3,6 +3,7 @@ import {CategoryService} from '../../../services/category.service';
 import {NgbPanelChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SignInComponent} from '../../../shop/component/sign-in/sign-in.component';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,10 +18,12 @@ export class NavbarComponent implements OnInit {
   left = 'left';
   categories: any = [];
   panelId: any;
+  isAuthenticated: any;
 
 
   constructor(private categoryService: CategoryService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private authService: AuthService, ) {
   }
 
   toggleSidebar(): any {
@@ -38,9 +41,7 @@ export class NavbarComponent implements OnInit {
     });
 
     modalRef.result.then((result) => {
-      console.log(result);
     }).catch((error) => {
-      console.log(error);
     });
   }
 
@@ -50,5 +51,6 @@ export class NavbarComponent implements OnInit {
         this.categories.push(category);
       });
     });
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 }

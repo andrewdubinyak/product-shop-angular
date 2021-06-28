@@ -56,15 +56,24 @@
            style="flex-flow: row-reverse">
         <div [ngbCollapse]="isMenuCollapsed" class="collapse-button">
           <div class="btn-group-navbar">
-            <button type="button" class="icon-button" [routerLink]="'cart'">
+            <button type="button" class="icon-button" [routerLink]="'/cart'">
               <i class="bi bi-basket"></i>
             </button>
             <span>Корзина</span>
           </div>
           <div class="profile-button-group btn-group-navbar">
-            <button type="button" class="icon-button" (click)="openSignInModal()">
-              <i class="bi bi-person-circle"></i>
-            </button>
+            <div *ngIf="isAuthenticated else loginbtn">
+              <button type="button" class="icon-button"
+                      [routerLink]="'/profile'">
+                <i class="bi bi-person-circle"></i>
+              </button>
+            </div>
+            <ng-template #loginbtn>
+              <button type="button" class="icon-button"
+                      (click)="openSignInModal()">
+                <i class="bi bi-person-circle"></i>
+              </button>
+            </ng-template>
             <span>Профіль</span>
           </div>
         </div>

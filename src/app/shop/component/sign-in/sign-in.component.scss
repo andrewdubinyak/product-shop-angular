@@ -1,7 +1,7 @@
 @import "./src/app/app.component";
 
 ::ng-deep .modal-signIn .modal-dialog {
-  max-width: 350px;
+  max-width: 400px;
 }
 
 .modal-header {
@@ -10,9 +10,6 @@
   text-align: center;
 }
 
-.modal-footer {
-  border: none;
-}
 
 .modal-body {
   padding: 0;
@@ -20,40 +17,6 @@
   height: 100%;
   border: none;
   border-radius: 2px;
-}
-
-.block-login {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  background-color: #f7cd50;
-  border-radius: 10px;
-}
-
-.block-header {
-  background: #00072b;
-  color: white;
-  width: -webkit-fill-available;
-  padding: 10px;
-  text-align: center;
-  border-radius: 10px 10px 0 0;
-  margin-bottom: 20px;
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-  flex-direction: column;
-}
-
-.block-phone > p {
-  padding: 5px;
-  background: white;
-  margin: 0;
-  align-items: center;
-  display: flex;
-  font-size: 18px;
-  border-radius: 5px 0 0 5px;
 }
 
 .form-login {
@@ -76,10 +39,6 @@
 }
 
 
-.block-phone {
-  display: flex;
-}
-
 input {
   padding-top: 2px;
   width: 100%;
@@ -92,8 +51,66 @@ input {
 
 }
 
+.btn-auth {
+  font-size: 10px;
+  text-transform: initial;
+}
+
 .btg-login {
   display: flex;
   flex-flow: column;
   margin-top: 14px;
+}
+
+/* Icon Button */
+.icon-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: none;
+  margin: 2px;
+  outline: none;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center
+}
+
+.icon-button:before {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-button:hover {
+  background: #00072b;
+
+  .bi-x {
+    color: white;
+  }
+}
+
+.bi-x {
+  color: black;
+}
+
+.icon-button:active {
+  background: rgba(24, 9, 9, 0.32);
+  border: none;
+}
+
+.is-invalid {
+  border-radius: 4px;
+  border: solid 1px red;
 }

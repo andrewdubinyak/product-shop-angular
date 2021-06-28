@@ -27,6 +27,7 @@
     "bootstrap": "^4.5.0",
     "bootstrap-icons": "^1.4.1",
     "ng-sidebar": "^9.4.2",
+    "ngx-mask": "^12.0.0",
     "ngx-slider": "0.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

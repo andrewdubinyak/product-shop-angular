@@ -1,21 +1,42 @@
 <div class="modal-header">
   <h4 style="font-weight: bold">Вхід</h4>
+  <button class="icon-button" (click)="closeModal()">
+    <i class="bi bi-x"></i>
+  </button>
 </div>
 <div class="modal-body">
-  <form action="" class="form-login">
+  <form [formGroup]="signInForm" class="form-login">
     <div class="input-group-block">
       <label>Логін</label>
-      <div class="block-phone">
-        <input type="text" placeholder="+380-000-000-000" type="tel">
+      <div class="">
+        <input type="tel" formControlName="phone_number"
+               prefix="+380" [mask]="'-000-000-000'"
+               [ngClass]="{'is-invalid':signInForm.controls['phone_number'].invalid &&
+               (signInForm.controls['phone_number'].dirty || signInForm.controls['phone_number'].touched)}">
       </div>
       <label>Пароль</label>
-      <input type="text" placeholder="password" type="password">
+      <input placeholder="Пароль" type="password" formControlName="password"
+             [ngClass]="{'is-invalid':signInForm.controls['password'].invalid &&
+             (signInForm.controls['password'].dirty || signInForm.controls['password'].touched)}">
     </div>
     <div class="btg-login">
-      <button class="button">ВХІД</button>
-      <button class="button">РЕЄСТРАЦІЯ</button>
+      <button type="submit" name="submit" value="submit" class="button"
+              [disabled]="signInForm.invalid"
+              (click)="onSubmit(signInForm.value)">
+        увійти
+      </button>
+      <button class="button btn-auth" (click)="openSignUpModal()">Авторизуватися
+        за допомогою SMS
+      </button>
+      <div>
+        <hr style="margin-bottom: 1px">
+        <p style="text-align: center;font-weight: 100;font-size: 14px;">
+          У вас немає облікового запису?</p>
+      </div>
+      <button class="button" (click)="openSignUpModal()">ЗАРЕЄСТРУВАТИСЬ
+      </button>
     </div>
-    <a style="text-align: center" href='/forgot-password'>Забули
-      Пароль?</a>
   </form>
 </div>
+
+<app-toasts></app-toasts>

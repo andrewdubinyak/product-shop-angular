@@ -9,13 +9,16 @@ import {ShopComponent} from './shop/shop.component';
 import {ShopModule} from './shop/shop.module';
 import {JwtInterceptor} from './interceptors/auth.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ProfileModule} from './profile/profile.module';
+import {ProfileComponent} from './profile/profile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ShopComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     CoreModule,
     ShopModule,
+    ProfileModule,
     HttpClientModule,
     NgbModule
   ],

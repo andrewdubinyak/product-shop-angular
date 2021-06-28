@@ -3,7 +3,7 @@ import {Options} from '@angular-slider/ngx-slider';
 import {ProductService} from '../../../services/product.service';
 import {CategoryService} from '../../../services/category.service';
 import {NgbPanelChangeEvent} from '@ng-bootstrap/ng-bootstrap';
-import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -11,6 +11,7 @@ import {NgSelectModule, NgOption} from '@ng-select/ng-select';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  headerName: any;
   products: any = [];
   categories: any = [];
   isContentOpen: any = {};
@@ -32,25 +33,23 @@ export class ProductComponent implements OnInit {
 
   opened = false;
 
-  toggleSidebar(): any {
-    this.opened = !this.opened;
-  }
-
   toggleAccordion(event: NgbPanelChangeEvent, idAccordion: number): any {
     this.panelId = event.panelId;
     this.isContentOpen[idAccordion] = event.nextState;
   }
 
   constructor(private productService: ProductService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.headerName = this.route.snapshot.params.id;
+
     this.productService.getAllProduct().subscribe((products: any) => {
       this.products = products;
     });
     this.categoryService.getAllCategory().subscribe((category: any) => {
-      console.log(category);
       this.categories = category;
     });
   }
