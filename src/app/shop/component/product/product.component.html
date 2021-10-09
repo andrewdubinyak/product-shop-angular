@@ -64,7 +64,7 @@
       <div class="row">
         <div class="col-6 col-md-3 product-card"
              *ngFor="let product of products">
-          <div>
+          <div [routerLink]="['/product-detail', product.id]">
             <div class="discount">
               <p>Акція</p>
             </div>
@@ -72,7 +72,7 @@
               <i class="bi bi-heart" style="color: #81d44b"></i>
             </div>
             <div *ngFor="let image of product.image"
-                 [routerLink]="['../product-detail', product.id]">
+                 [routerLink]="['/product-detail', product.id]">
               <img class="img-fluid" [src]="image.image">
             </div>
             <p>{{product.name}}</p>

@@ -11,24 +11,24 @@
       <ngb-panel>
         <ng-template ngbPanelTitle>
           <div class="accordion-btn">
-            <span>{{category.name}}</span>
+            {{category.name}}
             <div class="collapse-icon">
-              <i *ngIf="!isContentOpen[category.id]" class="bi bi-plus"
+              <i *ngIf="!isContentOpen[category.id]"
+                 class="bi bi-chevron-down"
                  style="color: black"></i>
-              <i *ngIf="isContentOpen[category.id]" class="bi bi-dash"
-                 style="color: black"></i>
+              <i *ngIf="isContentOpen[category.id]" class="bi bi-chevron-up"
+                 style="color: white"></i>
             </div>
           </div>
         </ng-template>
         <ng-template ngbPanelContent>
           <div style="display: flex;flex-flow: column"
                *ngFor="let subCategory of category.sub_categories">
-            <button class="menu-button button" [routerLink]="['product']">
-              <span>{{subCategory.name}}</span>
-            </button>
+            <a class="text-link">{{subCategory.name}}</a>
           </div>
         </ng-template>
       </ngb-panel>
+      <hr>
     </ngb-accordion>
   </ng-sidebar>
   <div ng-sidebar-content>

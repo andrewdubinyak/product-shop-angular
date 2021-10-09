@@ -60,7 +60,16 @@ export class SignUpComponent implements OnInit {
     };
     this.authService.signUp(payload)
       .pipe(takeUntil(this.subscriptionDestroyed$)).subscribe((res: any) => {
-      console.log(res);
+      if (res) {
+        window.localStorage.setItem(Constants.localStorageKeys.KEY_LOGGEDIN_USER, JSON.stringify(res.token));
+        this.router.navigateByUrl('/profile');
+        this.commonService.showSuccessToastMessage('Logged in successfully!');
+        this.closeModal();
+      } else {
+        this.commonService.showErrorToastMessage('Invalid email or password!');
+      }
+    }, (error1: any) => {
+      this.commonService.showErrorToastMessage('Invalid email or password!');
     });
   }
 
