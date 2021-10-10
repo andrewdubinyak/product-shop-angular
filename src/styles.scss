@@ -74,6 +74,15 @@ i {
       height: 20px;
       top: -9px;
       z-index: 1;
+      background-color: #f7cd50;
+    }
+
+    .ngx-slider-pointer.ngx-slider-active:after {
+      background-color: #f7cd50;
+    }
+
+    .ngx-slider-selection {
+      background-color: #f7cd50;
     }
   }
 }

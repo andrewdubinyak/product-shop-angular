@@ -25,12 +25,7 @@ export class AuthService {
 
   isAuthenticated(): any {
     const loggedInUser = JSON.parse(window.localStorage.getItem(Constants.localStorageKeys.KEY_LOGGEDIN_USER) as string);
-    if (loggedInUser) {
-      return true;
-    } else {
-      this.router.navigateByUrl('catalog');
-      return false;
-    }
+    return !!loggedInUser;
   }
 
   signIn(payload: any): any {

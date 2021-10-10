@@ -3,16 +3,17 @@
     <h2>{{headerName}}</h2>
     <div class="product-filter d-none d-md-block d-lg-block">
       <ngb-accordion *ngFor="let category of categories"
-                     (panelChange)="toggleAccordion($event, category.id)">
-        <ngb-panel>
+                     [activeIds]="headerName"
+                     (panelChange)="toggleAccordion($event, category.name)">
+        <ngb-panel id="{{category.name}}">
           <ng-template ngbPanelTitle>
             <div class="accordion-btn">
               {{category.name}}
               <div class="collapse-icon">
-                <i *ngIf="!isContentOpen[category.id]"
+                <i *ngIf="!isContentOpen[category.name]"
                    class="bi bi-chevron-down"
                    style="color: black"></i>
-                <i *ngIf="isContentOpen[category.id]" class="bi bi-chevron-up"
+                <i *ngIf="isContentOpen[category.name]" class="bi bi-chevron-up"
                    style="color: white"></i>
               </div>
             </div>
@@ -26,34 +27,50 @@
         </ngb-panel>
         <hr>
       </ngb-accordion>
-      <!--      <h2>Filter By Price</h2>-->
-      <!--      <div class="filter-rice">-->
-      <!--        <input type="number" [(ngModel)]="minValue">-->
-      <!--        - -->
-      <!--        <input type="number" [(ngModel)]="maxValue">-->
-      <!--        $-->
-      <!--      </div>-->
-      <!--      <ngx-slider [(value)]="minValue" [(highValue)]="maxValue"-->
-      <!--                  [options]="options"></ngx-slider>-->
-      <!--      <h2>Filter by Value</h2>-->
-      <!--      <div class="product-filter-checkbox">-->
-      <!--        <div class="input-group" style="align-items: center">-->
-      <!--          <input class="m-3" type="checkbox" value="">-->
-      <!--          <h4>Value</h4>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <ngb-accordion class="filter-accordion" *ngFor="let item of filterMenu"
+                     (panelChange)="toggleAccordion($event, item.id)">
+        <ngb-panel>
+          <ng-template ngbPanelTitle>
+            <div class="accordion-btn">
+              {{item.name}}
+              <div class="collapse-icon">
+                <i *ngIf="!isContentOpen[item.id]"
+                   class="bi bi-chevron-down"
+                   style="color: black"></i>
+                <i *ngIf="isContentOpen[item.id]" class="bi bi-chevron-up"
+                   style="color: black"></i>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div style="display: flex;flex-flow: column" *ngIf="item.id == 'price'; else countryBlock">
+              <div class="filter-rice">
+                <span style="font-size: 14px">Від</span>
+                <input type="text" [(ngModel)]="minValue"
+                style="margin-left: 15px">
+                <span style="font-size: 14px">До</span>
+                <input type="text" [(ngModel)]="maxValue"
+                style="margin-left: 15px">
+              </div>
+              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue"
+                          [options]="options">
+              </ngx-slider>
+            </div>
+            <ng-template #countryBlock>
+              <h1>ZAL UPA</h1>
+            </ng-template>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+      <button class="dropdown-btn">Скинути</button>
     </div>
     <div class="product-sorting-header">
       <span style="margin-left: 10px; margin-right: 10px">Сортувати по:</span>
-      <ng-select [items]="cities"
+      <ng-select [items]="sortingType"
                  bindLabel="name"
-                 [(ngModel)]="selectedCity"
+                 [(ngModel)]="selectedSort"
                  style="width: 240px">
       </ng-select>
-      <!--      <button class="icon-button d-md-none d-sm-block"-->
-      <!--              (click)="toggleSidebar()">-->
-      <!--        <i class="bi bi-filter-square" style="color: black"></i>-->
-      <!--      </button>-->
       <div class="right-button">
         <button class="icon-button">
           <i class="bi bi-grid-3x3-gap-fill" style="color: black"></i>
@@ -64,19 +81,17 @@
       <div class="row">
         <div class="col-6 col-md-3 product-card"
              *ngFor="let product of products">
-          <div [routerLink]="['/product-detail', product.id]">
-            <div class="discount">
-              <p>Акція</p>
-            </div>
-            <div class="heart-ico">
-              <i class="bi bi-heart" style="color: #81d44b"></i>
-            </div>
-            <div *ngFor="let image of product.image"
-                 [routerLink]="['/product-detail', product.id]">
-              <img class="img-fluid" [src]="image.image">
-            </div>
-            <p>{{product.name}}</p>
+          <div class="discount">
+            <p>Акція</p>
           </div>
+          <button class="heart-ico icon-button-cart">
+            <i class="bi bi-heart"></i>
+          </button>
+          <div *ngFor="let image of product.image"
+               [routerLink]="['/product-detail', product.id]">
+            <img class="img-fluid" [src]="image.image">
+          </div>
+          <p>{{product.name}}</p>
           <div *ngIf="product.active; else inactive" class="price-group">
             <p style="font-weight: bold; font-size: 20px">{{product.price}}
               ₴</p>
@@ -87,6 +102,7 @@
           <ng-template #inactive>
             <p style="color: red; text-align: center">Товар відсутній</p>
           </ng-template>
+          <!-- TODO -->
           <!--          <button class="icon-button">-->
           <!--            <i class="bi bi-cart-check"></i>-->
           <!--          </button>-->
