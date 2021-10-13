@@ -17,6 +17,10 @@ export class ProductService {
     return this.http.get(environment.apiBaseUrl + '/products');
   }
 
+  getFilteringProduct(categoryName: string): any {
+    return this.http.get(environment.apiBaseUrl + `/products-filter/${categoryName}`);
+  }
+
   getById(id: number): any {
     return this.http.get(environment.apiBaseUrl + `/products/${id}`);
   }

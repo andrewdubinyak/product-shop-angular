@@ -3,17 +3,17 @@
     <h2>{{headerName}}</h2>
     <div class="product-filter d-none d-md-block d-lg-block">
       <ngb-accordion *ngFor="let category of categories"
-                     [activeIds]="headerName"
-                     (panelChange)="toggleAccordion($event, category.name)">
+                     [activeIds]="activePanel"
+                     (panelChange)="toggleAccordion($event, category.slug); categoryChange(category.slug)">
         <ngb-panel id="{{category.name}}">
           <ng-template ngbPanelTitle>
             <div class="accordion-btn">
               {{category.name}}
               <div class="collapse-icon">
-                <i *ngIf="!isContentOpen[category.name]"
+                <i *ngIf="!isContentOpen[category.slug]"
                    class="bi bi-chevron-down"
                    style="color: black"></i>
-                <i *ngIf="isContentOpen[category.name]" class="bi bi-chevron-up"
+                <i *ngIf="isContentOpen[category.slug]" class="bi bi-chevron-up"
                    style="color: white"></i>
               </div>
             </div>
@@ -21,7 +21,8 @@
           <ng-template ngbPanelContent>
             <div style="display: flex;flex-flow: column"
                  *ngFor="let subCategory of category.sub_categories">
-              <a class="text-link">{{subCategory.name}}</a>
+              <a [routerLink]="['../', subCategory.slug]" (click)="categoryChange(subCategory.slug)"
+                 class="text-link">{{subCategory.name}}</a>
             </div>
           </ng-template>
         </ngb-panel>
@@ -43,14 +44,15 @@
             </div>
           </ng-template>
           <ng-template ngbPanelContent>
-            <div style="display: flex;flex-flow: column" *ngIf="item.id == 'price'; else countryBlock">
+            <div style="display: flex;flex-flow: column"
+                 *ngIf="item.id == 'price'; else countryBlock">
               <div class="filter-rice">
                 <span style="font-size: 14px">Від</span>
                 <input type="text" [(ngModel)]="minValue"
-                style="margin-left: 15px">
+                       style="margin-left: 15px">
                 <span style="font-size: 14px">До</span>
                 <input type="text" [(ngModel)]="maxValue"
-                style="margin-left: 15px">
+                       style="margin-left: 15px">
               </div>
               <ngx-slider [(value)]="minValue" [(highValue)]="maxValue"
                           [options]="options">

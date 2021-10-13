@@ -22,7 +22,7 @@ const routes: Routes = [
         path: 'sign-up', component: SignUpComponent, pathMatch: 'full'
       },
       {
-        path: 'product/:id', component: ProductComponent, pathMatch: 'full'
+        path: 'product/:name', component: ProductComponent, pathMatch: 'full'
       },
       {
         path: 'product-detail/:id',

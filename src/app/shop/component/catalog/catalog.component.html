@@ -37,7 +37,7 @@
       <div class="col-6 col-md-4 p-3" *ngFor="let category of categories">
         <div class="catalog-card card">
           <img class="card-img-top" style="max-height: 250px"
-               [routerLink]="'product/'+category.name"
+               [routerLink]="'product/'+category.slug"
                src="{{category.image.image}}">
           <div class="card-body">
             <p class="card-text">{{category.name}}</p>
