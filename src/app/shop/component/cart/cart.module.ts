@@ -5,7 +5,7 @@ import {StepOneComponent} from './stepper/step-one/step-one.component';
 import {StepTwoComponent} from './stepper/step-two/step-two.component';
 import {StepThreeComponent} from './stepper/step-three/step-three.component';
 import {StepFourComponent} from './stepper/step-four/step-four.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CartComponent} from "./cart.component";
 import {NgStepperModule} from "angular-ng-stepper";
 import {CdkStepperModule} from "@angular/cdk/stepper";
@@ -32,6 +32,7 @@ import {CoreModule} from "../../../core/core.module";
     NgStepperModule,
     CdkStepperModule,
     CoreModule,
+    FormsModule,
   ]
 })
 export class CartModule {

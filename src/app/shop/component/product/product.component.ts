@@ -4,6 +4,7 @@ import {ProductService} from '../../../services/product.service';
 import {CategoryService} from '../../../services/category.service';
 import {NgbPanelChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -11,10 +12,20 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+
+  constructor(private productService: ProductService,
+              private categoryService: CategoryService,
+              private cartService: CartService,
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
+
   headerName: any;
   activePanel: any;
   products: any = [];
   categories: any = [];
+  cartItems: any = [];
+  items: any = [];
   isContentOpen: any = {};
   panelId: any;
   minValue = 0;
@@ -55,16 +66,19 @@ export class ProductComponent implements OnInit {
     this.isContentOpen[idAccordion] = event.nextState;
   }
 
-  constructor(private productService: ProductService,
-              private categoryService: CategoryService,
-              private router: Router,
-              private route: ActivatedRoute) {
-  }
-
   categoryChange(categoryName: string): void {
     this.router.navigate(['product/' + categoryName]).then(() => {
       window.location.reload();
     });
+  }
+
+  addToCart(item: any): void {
+    if (!this.cartService.itemInCart(item)) {
+      item.qtyTotal = 1;
+      item.subTotal = item.price;
+      this.cartService.addToCart(item);
+      this.cartItems = [...this.cartService.getItems()];
+    }
   }
 
   ngOnInit(): void {
@@ -72,6 +86,7 @@ export class ProductComponent implements OnInit {
 
     this.productService.getFilteringProduct(categoryName).subscribe((products: any) => {
       this.products = products;
+      this.items = products;
     });
 
     this.categoryService.getAllCategory().subscribe((category: any) => {

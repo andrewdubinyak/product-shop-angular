@@ -1,39 +1,24 @@
 import {Injectable} from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  constructor() {
-  }
-
   items = [];
 
-  addToCart(addedItem): any {
+  addToCart(addedItem: any): void {
+    // @ts-ignore
     this.items.push(addedItem);
-    // console.log(addedItem);
-
-    // -----check if there are items already added in cart
-    /* let existingItems = [];
-    if ( localStorage.getItem('cart_items')){//----- update by adding new items
-      existingItems = JSON.parse(localStorage.getItem('cart_items'));
-      existingItems = [addedItem, ...existingItems];
-      console.log( 'Items exists');
-    } */
-    // -----if no items, add new items
-    /* else{
-      console.log( 'NO items exists');
-      existingItems = [addedItem]
-    } */
-
     this.saveCart();
   }
 
-  getItems(): any {
+  getItems(): any[] {
     return this.items;
   }
 
   loadCart(): void {
+    // @ts-ignore
     this.items = JSON.parse(localStorage.getItem('cart_items')) ?? [];
   }
 
@@ -41,13 +26,13 @@ export class CartService {
     localStorage.setItem('cart_items', JSON.stringify(this.items));
   }
 
-  clearCart(items): any {
+  clearCart(): void {
     this.items = [];
-
     localStorage.removeItem('cart_items');
   }
 
-  removeItem(item): any {
+  removeItem(item: any): void {
+    // @ts-ignore
     const index = this.items.findIndex(o => o.id === item.id);
 
     if (index > -1) {
@@ -56,7 +41,9 @@ export class CartService {
     }
   }
 
-  itemInCart(item): boolean {
+  itemInCart(item: any): boolean {
+    // @ts-ignore
     return this.items.findIndex(o => o.id === item.id) > -1;
   }
+
 }

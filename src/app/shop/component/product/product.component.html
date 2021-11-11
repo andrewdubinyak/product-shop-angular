@@ -4,11 +4,11 @@
     <div class="product-filter d-none d-md-block d-lg-block">
       <ngb-accordion *ngFor="let category of categories"
                      [activeIds]="activePanel"
-                     (panelChange)="toggleAccordion($event, category.slug); categoryChange(category.slug)">
+                     (panelChange)="toggleAccordion($event, category.slug)">
         <ngb-panel id="{{category.name}}">
           <ng-template ngbPanelTitle>
             <div class="accordion-btn">
-              {{category.name}}
+              <a (click)="categoryChange(category.slug)">{{category.name}}</a>
               <div class="collapse-icon">
                 <i *ngIf="!isContentOpen[category.slug]"
                    class="bi bi-chevron-down"
@@ -97,7 +97,7 @@
           <div *ngIf="product.active; else inactive" class="price-group">
             <p style="font-weight: bold; font-size: 20px">{{product.price}}
               ₴</p>
-            <button class="icon-button-cart">
+            <button (click)="addToCart(product)" class="icon-button-cart">
               <i class="bi bi-cart-plus"></i>
             </button>
           </div>

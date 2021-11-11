@@ -5,9 +5,58 @@
         novalidate
         #formRef="ngForm">
   </form>
-  <h1>Cart</h1>
+
+  <!--  <div class="product-cart">-->
+  <!--    <i class="bi bi-basket icon-basket"></i>-->
+  <!--  </div>-->
+
   <div class="product-cart">
-    <i class="bi bi-basket icon-basket"></i>
+    <div>
+      <h1>Корзина</h1>
+      <div class="header-btn">
+        <button class="icon-button">
+          <i class="bi bi-x-circle" style="color: black"></i>
+        </button>
+        <p style="margin-bottom: 1px">Очистити корзину</p>
+      </div>
+    </div>
+    <div *ngFor="let item of items; let i = index" class="product">
+      <div *ngFor="let image of item.image" class="cart-img">
+        <img class="img-fluid" [src]="image.image">
+      </div>
+      <div class="product-info">
+        <div class="product-description">
+          <p>{{ item.name }}</p>
+        </div>
+        <div  class="product-action">
+          <div style="margin-right: 60px">
+            <span>Ціна за штуку:</span>
+            <p>{{ item.price }} грн.</p>
+          </div>
+          <div class="input-group" role="group">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-outline-success"
+                      (click)="decrease(item, i)"
+                      [disabled]="item.qtyTotal == 1">-
+              </button>
+              <input type="number" value="{{ item.qtyTotal }}"/>
+              <button type="button" class="btn btn-outline-success"
+                      (click)="increase(item, i)"
+                      [disabled]="item.qtyTotal >= item.amount">+
+              </button>
+            </div>
+          </div>
+          <div style="text-align: left">
+            <span>Сума:</span>
+            <p #subTotalWrap>{{ item.subTotal }} грн.</p>
+          </div>
+        </div>
+      </div>
+      <button class="icon-button">
+        <i class="bi bi-x-circle" style="color: black"></i>
+      </button>
+    </div>
   </div>
+  <br>
   <button type="button" class="btn btn-success" cdkStepperNext>Next</button>
 </div>
