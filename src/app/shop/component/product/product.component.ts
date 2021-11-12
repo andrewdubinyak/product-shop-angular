@@ -81,6 +81,10 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  itemInCart(item: any): boolean {
+    return this.cartService.itemInCart(item);
+  }
+
   ngOnInit(): void {
     const categoryName = this.route.snapshot.params.name;
     this.cartService.loadCart();

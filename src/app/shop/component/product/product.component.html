@@ -97,17 +97,18 @@
           <div *ngIf="product.active; else inactive" class="price-group">
             <p style="font-weight: bold; font-size: 20px">{{product.price}}
               ₴</p>
-            <button (click)="addToCart(product)" class="icon-button-cart">
+            <button *ngIf="!itemInCart(product); else added" (click)="addToCart(product)" class="icon-button-cart">
               <i class="bi bi-cart-plus"></i>
             </button>
           </div>
           <ng-template #inactive>
             <p style="color: red; text-align: center">Товар відсутній</p>
           </ng-template>
-          <!-- TODO -->
-          <!--          <button class="icon-button">-->
-          <!--            <i class="bi bi-cart-check"></i>-->
-          <!--          </button>-->
+          <ng-template #added>
+            <div class="icon-button">
+              <i class="bi bi-cart-check" style="color: #27a844"></i>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
