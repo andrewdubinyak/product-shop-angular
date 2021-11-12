@@ -14,7 +14,7 @@
     <div>
       <h1>Корзина</h1>
       <div class="header-btn">
-        <button class="icon-button">
+        <button class="icon-button" (click)="clearCart()">
           <i class="bi bi-x-circle" style="color: black"></i>
         </button>
         <p style="margin-bottom: 1px">Очистити корзину</p>
@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-      <button class="icon-button">
+      <button class="icon-button" (click)="removeFromCart(item)">
         <i class="bi bi-x-circle" style="color: black"></i>
       </button>
     </div>

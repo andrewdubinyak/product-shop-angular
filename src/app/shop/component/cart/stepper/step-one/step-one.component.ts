@@ -5,7 +5,7 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {CartService} from '../../../../../services/cart.service';
 
 @Component({
@@ -17,7 +17,6 @@ export class StepOneComponent implements OnInit {
   @ViewChildren('subTotalWrap') subTotalItems: QueryList<ElementRef> | undefined;
   public stepOneForm: FormGroup;
   items: any = [];
-  subTotal: any;
 
   constructor(private fb: FormBuilder,
               private cartService: CartService) {
@@ -37,6 +36,16 @@ export class StepOneComponent implements OnInit {
   increase(item: any, index: any): void {
     item.qtyTotal++;
     this.changeSubtotal(item, index);
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart();
+    this.items = [...this.cartService.getItems()];
+  }
+
+  removeFromCart(item: any): void {
+    this.cartService.removeItem(item);
+    this.items = this.cartService.getItems();
   }
 
   decrease(item: any, index: any): void {

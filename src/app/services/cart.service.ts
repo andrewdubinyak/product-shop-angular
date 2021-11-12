@@ -7,8 +7,7 @@ import {Injectable} from '@angular/core';
 export class CartService {
   items = [];
 
-  addToCart(addedItem: any): void {
-    // @ts-ignore
+  addToCart(addedItem: never): void {
     this.items.push(addedItem);
     this.saveCart();
   }

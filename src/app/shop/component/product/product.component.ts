@@ -25,7 +25,6 @@ export class ProductComponent implements OnInit {
   products: any = [];
   categories: any = [];
   cartItems: any = [];
-  items: any = [];
   isContentOpen: any = {};
   panelId: any;
   minValue = 0;
@@ -76,6 +75,7 @@ export class ProductComponent implements OnInit {
     if (!this.cartService.itemInCart(item)) {
       item.qtyTotal = 1;
       item.subTotal = item.price;
+      // @ts-ignore
       this.cartService.addToCart(item);
       this.cartItems = [...this.cartService.getItems()];
     }
@@ -83,10 +83,10 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     const categoryName = this.route.snapshot.params.name;
+    this.cartService.loadCart();
 
     this.productService.getFilteringProduct(categoryName).subscribe((products: any) => {
       this.products = products;
-      this.items = products;
     });
 
     this.categoryService.getAllCategory().subscribe((category: any) => {
