@@ -10,6 +10,7 @@ import {CartComponent} from "./cart.component";
 import {NgStepperModule} from "angular-ng-stepper";
 import {CdkStepperModule} from "@angular/cdk/stepper";
 import {CoreModule} from "../../../core/core.module";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -26,14 +27,15 @@ import {CoreModule} from "../../../core/core.module";
     StepThreeComponent,
     StepFourComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    NgStepperModule,
-    CdkStepperModule,
-    CoreModule,
-    FormsModule,
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        NgStepperModule,
+        CdkStepperModule,
+        CoreModule,
+        FormsModule,
+        RouterModule,
+    ]
 })
 export class CartModule {
 }

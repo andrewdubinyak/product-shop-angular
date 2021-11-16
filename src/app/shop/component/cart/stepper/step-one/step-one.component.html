@@ -14,8 +14,8 @@
     <div>
       <h1>Корзина</h1>
       <div class="header-btn">
-        <button class="icon-button" (click)="clearCart()">
-          <i class="bi bi-x-circle" style="color: black"></i>
+        <button class="icon-button icon-button-remove" (click)="clearCart()">
+          <i class="bi bi-trash-fill"></i>
         </button>
         <p style="margin-bottom: 1px">Очистити корзину</p>
       </div>
@@ -26,7 +26,7 @@
       </div>
       <div class="product-info">
         <div class="product-description">
-          <p>{{ item.name }}</p>
+          <a [routerLink]="['/product-detail', item.id]">{{ item.name }}</a>
         </div>
         <div  class="product-action">
           <div style="margin-right: 60px">
@@ -52,8 +52,8 @@
           </div>
         </div>
       </div>
-      <button class="icon-button" (click)="removeFromCart(item)">
-        <i class="bi bi-x-circle" style="color: black"></i>
+      <button class="icon-button icon-button-remove" (click)="removeFromCart(item)">
+        <i class="bi bi-x-circle"></i>
       </button>
     </div>
   </div>
